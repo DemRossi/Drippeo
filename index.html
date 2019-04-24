@@ -13,30 +13,56 @@
 
     <!--header-->
     <header>
-        <nav>
+        <nav class="clearfix">
             <img href="#" src="" alt="logo-drippeo">
+            <div class="toggle">
+            <span></span>
+            <span></span>
+            <span></span>
             <ul>
-                <li><a href="#">Over ons</a></li>
-                <li><a href="#">Product</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Dashboard</a></li>
+                <li><a href="#overOns">Over ons</a></li>
+                <li><a href="#product">Product</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" id="dashboard--btn">Dashboard</a></li>
             </ul>
+        </div>
         </nav>
     </header>
 
     <!--overOns-->
-    <div class="overOns">
+    <div class="overOns" id="overOns">
         <h2>Over Ons</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+            Nisi ipsam tempora tenetur repellat cupiditate mollitia rem modi in voluptates molestiae! 
+            Dolorum deserunt exercitationem iusto molestiae sed magnam perferendis laborum ratione?</p>
+        
     </div>
 
     <!--product-->
-    <div class="product">
+    <div class="product" id="product">
         <h2>Het product</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+            Nisi ipsam tempora tenetur repellat cupiditate mollitia rem modi in voluptates molestiae! 
+            Dolorum deserunt exercitationem iusto molestiae sed magnam perferendis laborum ratione?</p>
     </div>
 
     <!--contact-->
-    <div class="contact">
+    <div class="contact" id="contact">
         <h2>Contact</h2>
+            <form>
+                <div class="form__veld">
+                    <label for="email">Email</label>
+                    <input type="text" placeholder="Email" name="email" required>
+                </div>
+                <div class="form__veld">
+                        <label for="email">Onderwerp</label>
+                        <input type="text" placeholder="Onderwerp" name="onderwerp">
+                </div>
+                <div class="form__veld">
+                        <label for="email">Bericht</label>
+                        <textarea type="text" placeholder="Typ hier u bericht" name="bericht"></textarea>
+                </div>
+            </form>
 
     </div>
 
