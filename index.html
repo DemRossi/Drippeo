@@ -13,20 +13,25 @@
 
     <!--header-->
     <header>
-        <nav class="clearfix">
-            <img href="#" src="" alt="logo-drippeo">
-            <div class="toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-            <ul>
-                <li><a href="#overOns">Over ons</a></li>
-                <li><a href="#product">Product</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#" id="dashboard--btn">Dashboard</a></li>
-            </ul>
+        <div class="navWrapper" >
+            <div class="logo"><h1>Drippeo.</h1></div>
+            <div class="nav__btn">
+                <svg class="ham hamRotate hamB " viewBox="-10 -5 120 110" width="80" onclick="this.classList.toggle('active')">
+                    <path class="line top whiteLines" d="m 70,33 h -40 c 0,0 -6,1.368796 -6,8.5 0,7.131204 6,8.5013 6,8.5013 l 20,-0.0013" />
+                    <path class="line middle whiteLines" d="m 70,50 h -40" />
+                    <path class="line bottom whiteLines" d="m 69.575405,67.073826 h -40 c -5.592752,0 -6.873604,-9.348582 1.371031,-9.348582 8.244634,0 19.053564,21.797129 19.053564,12.274756 l 0,-40" />
+                </svg>
+            </div>
+            <div class="clearfix"></div>
+            <nav>
+                <ul class="navUl" id="navUl">  
+                    <li><a href="#overOns" class="navItem" id="home">Over ons</a> </li>
+                    <li><a href="#product" class="navItem" id="about">Product</a></li>
+                    <li><a href="#contact" class="navItem" id="projects"> Contact</a></li>
+                    <li><a href="#" class="navItem" id="dashboard--btn">Dashboard</a></li>
+                </ul>
+            </nav>
         </div>
-        </nav>
     </header>
 
     <!--overOns-->
@@ -74,5 +79,6 @@
             <button class="button">Sign up now</button>
         </form>
     </footer>
+    <script src="js/mobileNavigation.js"></script>
 </body>
 </html>

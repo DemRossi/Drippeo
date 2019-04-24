@@ -17,49 +17,90 @@
 
 /* Start Header */
 
-header {
-  height: 100vh;
- 
+header{
+  width: 100vw;
+  height: 75px;
+  position: fixed;
+  z-index: 10;
+  -webkit-transition: height 2s; /* For Safari 3.1 to 6.0 */
+  transition: all 0.5s ease-out;
 }
-
-.toggle{
-
-  display: block;
-  position: relative;
-  top: 50px;
-  left: 50px;
-  
-  z-index: 1;
-  
-  -webkit-user-select: none;
-  user-select: none;
-
+.navWrapper{
+  width: 100%;
 }
-
-nav{
-  padding: 30px 55px 30px 55px;
-}
-
-nav img {
-  float: left;
-}
-
-nav li a{
-  text-decoration: none;
-  text-transform: lowercase;
-  letter-spacing: 1px;
-}
-
-nav li{
-  list-style-type: none;
-  float: left;
-  padding-left: 35px;
-}
-
-nav ul {
+.nav__btn{
+  width: 80px;
+  height: 75px;
   float: right;
 }
+/*hamburger animation*/
+.ham {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 400ms;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.hamRotate.active {
+  transform: rotate(45deg);
+}
+.line {
+  fill:none;
+  transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+  stroke-width:5.5;
+  stroke-linecap:round;
+  stroke: #000000;
+}
+.hamB .top {
+  stroke-dasharray: 40 82;
+}
+.hamB .middle {
+  stroke-dasharray: 40 111;
+}
+.hamB .bottom {
+  stroke-dasharray: 40 161;
+}
+.hamB.active .top {
+  stroke-dasharray: 17 82;
+  stroke-dashoffset: -62px;
+}
+.hamB.active .middle {
+  stroke-dashoffset: 23px;
+}
+.hamB.active .bottom {
+  stroke-dashoffset: -83px;
+}
+.navBgd{
+  height:100vh;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px black;
+}
+nav{
+    visibility: hidden;
+}
+#navUl{
+  -webkit-transition: margin 2s; /* For Safari 3.1 to 6.0 */
+  transition: margin 0.5s ease-in-out;
+}
+.navUl{
+    margin-top: -1000px;
+}
+.navItem{
+  width: 80%;
+  height: 75px;
+  margin: 25px auto; /*50 vanaf 375*/
+  line-height: 75px;
+  font-size: 2em;
+  font-family: "comfortaaregular", sans-serif;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+}
 
+/*
 #dashboard--btn{
   background-color: aqua;
   padding: 8px 15px 8px 15px;
@@ -68,6 +109,7 @@ nav ul {
 #dashboard--btn:hover{
   background-color: gray;
 }
+*/
 /* Stop Header */
 
 /* Start Footer */
