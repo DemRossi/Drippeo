@@ -4,6 +4,7 @@
   font-family: 'Lato', sans-serif;
   margin:0;
   padding:0;
+  color:#706f6f;
 }
 
 .clearfix:after {
@@ -15,23 +16,34 @@
   height: 0; 
 }
 
+.punt{
+  color: #72e0eb;
+}
 /* Start Header */
 
 header{
-  width: 100vw;
-  height: 75px;
-  position: fixed;
+  height: 100vh;
   z-index: 10;
-  -webkit-transition: height 2s; /* For Safari 3.1 to 6.0 */
-  transition: all 0.5s ease-out;
+
 }
 .navWrapper{
   width: 100%;
+  height: 60px;
 }
 .nav__btn{
   width: 80px;
   height: 75px;
   float: right;
+}
+
+.logo {
+  float: left;
+  padding: 15px 0 0 20px;
+  
+}
+.logo h1 {
+  font-weight: 400;
+  font-size: 1.5em;
 }
 /*hamburger animation*/
 .ham {
@@ -51,7 +63,7 @@ header{
   transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
   stroke-width:5.5;
   stroke-linecap:round;
-  stroke: #000000;
+  stroke: #706f6f;
 }
 .hamB .top {
   stroke-dasharray: 40 82;
@@ -89,28 +101,79 @@ nav{
 }
 .navItem{
   width: 80%;
-  height: 75px;
-  margin: 25px auto; /*50 vanaf 375*/
+  height: 60px;
+  margin: 0 auto; /*50 vanaf 375*/
   line-height: 75px;
-  font-size: 2em;
-  font-family: "comfortaaregular", sans-serif;
-  color: black;
+  font-size: 1em;
   text-decoration: none;
-  text-align: center;
+  text-align: right;
   display: block;
 }
 
-/*
-#dashboard--btn{
-  background-color: aqua;
-  padding: 8px 15px 8px 15px;
-  border-radius: 20px;
+
+.slogan{
+  padding: 110px 0 80px 55px;
+
 }
-#dashboard--btn:hover{
-  background-color: gray;
+.slogan p {
+  font-size: 3.5em;
+  }
+
+.dashboard--link{
+  border-radius: 40px;
+  background-color: #ffff;
+  height: 32px;
+  width: 300px;
+  margin: 0 0 0 55px;
+  padding: 6px 0 6px 24px;
 }
-*/
+
+.dashboard--link{
+  border-radius: 40px;
+  background-color: #ffff;
+  height: 32px;
+  width: 300px;
+  margin: 0 0 0 55px;
+  padding: 6px 0 6px 24px;
+}
+
+.dashboard--link:after{
+  content: "";
+  display: inline-block;
+  background-image: url("../images/pijl.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  height: 10px;
+  width: 25px;
+  margin-left: 8px;
+
+}
 /* Stop Header */
+
+/*Over Ons*/
+
+.overOns{
+  height: 100vh;
+  
+}
+
+/*Product*/
+
+.product{
+  height: 100vh;
+}
+
+
+/*Contact*/
+
+.contact{
+  height: 100vh;
+}
+
+
+
+
 
 /* Start Footer */
 
