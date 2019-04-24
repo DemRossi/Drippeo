@@ -1,3 +1,0 @@
-# ProductLab2
-
-💻
