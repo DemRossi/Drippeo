@@ -30,6 +30,16 @@ p{
   padding-bottom: 30px;
 }
 
+input {
+	outline: none;
+	border: none;
+}
+
+input::-webkit-input-placeholder { color: #706f6f;}
+input:-moz-placeholder { color: #706f6f;}
+input::-moz-placeholder { color: #706f6f;}
+input:-ms-input-placeholder { color: #706f6f;}
+
 /* Start Header */
 .container--header{
   width: 100%;
@@ -280,11 +290,10 @@ footer {
   background-color:#706f6f;
   height: 100px;
   width: 100vw;
-
   display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 footer p {
@@ -299,17 +308,18 @@ footer p {
 }
 
 footer form{
-
   position: relative;
   margin-top:-35px;
 
 }
 
 footer form input{
-  border: none;
   height: 30px;
   width: 170px;
   padding:10px;
+  border-radius: 3px;
+  line-height: 1.2;
+  background-color: #e6e6e6;
 
 }
 footer form button{
@@ -318,7 +328,7 @@ footer form button{
  width: 80px;
  margin-left:-5px;
  background-image: linear-gradient(-90deg,rgba(102,242,215), rgba(127,206,255)); 
- color:#706f6f;
+ color:white;
 }
 
 /* Stop Footer */

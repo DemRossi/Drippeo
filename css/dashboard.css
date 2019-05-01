@@ -18,17 +18,6 @@ a:hover {
     color: #72e0eb;
 }
 
-input {
-	outline: none;
-	border: none;
-}
-
-input::-webkit-input-placeholder { color: #8f8fa1;}
-input:-moz-placeholder { color: #8f8fa1;}
-input::-moz-placeholder { color: #8f8fa1;}
-input:-ms-input-placeholder { color: #8f8fa1;}
-
-
 label {
   display: block;
   margin: 0;
@@ -48,10 +37,6 @@ label {
     justify-content: center;
     align-items: center;
     padding: 15px;
-    
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;;
   }
   
   
