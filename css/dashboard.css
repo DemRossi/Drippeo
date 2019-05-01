@@ -1,6 +1,4 @@
-/*----LOGIN-----*/
-
-
+/*----LOGIN/REGISTER----*/
 a {
 	font-size: 14px;
 	line-height: 1.7;
@@ -238,4 +236,75 @@ label {
     background-color: #72e0eb;
   }
   
-  
+/*----NAVIGATIE-----*/
+.nav--container{
+    width: 100vw;
+    background-color: #f4f4f4;
+    height: 70px;
+}
+/*Hamburger*/
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+
+    background-color: #f4f4f4;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+}
+
+/* menu links */
+.sidenav a {
+    margin: 20px 0 0px 30px;
+    text-decoration: none;
+    font-size: 1em;
+    display: block;
+    transition: 0.3s;
+    width: 227px;
+
+}
+
+.sidenav a:hover, .offcanvas a:focus {
+    color: #72e0eb;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: -13px;
+    font-size: 38px;
+    margin-left: 30px;
+    width: initial;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+.sub-nav {
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .3s;
+    text-decoration: none;
+    margin: 0 12px 0 12px;
+}
+
+.hamburger-icon {
+    font-size: 32px;
+    color: #706f6f;
+    text-decoration: none;
+    position: fixed;
+    z-index: 1000;
+    margin-left: 30px;
+    top: 15px;
+    cursor: pointer;
+    display: inherit;
+  }
+
+  .hamburger-icon:hover{
+    color: #72e0eb;
+  }

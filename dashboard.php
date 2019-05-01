@@ -4,7 +4,7 @@
 include_once("bootstrap.php");
 
 // Controleren of we al ingelogd zijn
-User::checkLogin();
+//User::checkLogin();
 
 ?>
 
@@ -21,8 +21,42 @@ User::checkLogin();
     <title>Dashboard</title>
 </head>
 <body>
+<!---Navigatie--->
+
+<div class="nav--container">
+<div id="mySidenav" class="sidenav">
+  <a  class="closebtn" onclick="closeNav()">&times;</a>
+	<div class="mobile-menu-items">
+		<a class="sub-nav"  onclick="closeNav()"href="#">
+			Dashboard
+		</a>
+		<a class="sub-nav " onclick="closeNav()"href='#'>
+			Annual consumption
+        </a>
+        <a class="sub-nav " onclick="closeNav()"href='#'>
+			Consume less 
+        </a>
+        <a class="sub-nav " onclick="closeNav()"href='#'>
+			Settings
+		</a>
+	</div>
+</div>
+<span class="hamburger-icon"onclick="openNav()">&#9776;</span>
+</div>
 
 
+
+<script>
+
+/*---Navigatie---*/
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+    </script>
     
 </body>
 </html>
