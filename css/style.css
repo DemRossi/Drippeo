@@ -279,26 +279,38 @@ padding-bottom: 30px;
 footer {
   background-color:#706f6f;
   height: 100px;
- 
+  width: 100vw;
+
+  display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 footer p {
   color:#fff;
-  padding: 10px 0 0 200px;
-  font-size: 1em;
-  float:left;
+  text-align: center;
+  font-size: 0.8em;
+  padding-bottom:0px;
+  width: 100%;
+  margin-bottom: 16px;
+  position: relative;
+
 }
 
 footer form{
-  float:right;
-  padding: 10px 200px 0 0;
-  
+
+  position: relative;
+  margin-top:-35px;
+
 }
+
 footer form input{
   border: none;
   height: 30px;
   width: 170px;
   padding:10px;
+
 }
 footer form button{
   border: none;

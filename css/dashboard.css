@@ -43,10 +43,6 @@ label {
 .container {
     width: 100%;  
     min-height: 100vh;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -242,6 +238,13 @@ label {
     background-color: #f4f4f4;
     height: 70px;
 }
+
+.nav--container h1{
+text-align: center;
+font-weight: 400;
+  font-size: 1.5em;
+  padding-top: 20px;
+}
 /*Hamburger*/
 .sidenav {
     height: 100%;
@@ -305,6 +308,8 @@ label {
     display: inherit;
   }
 
-  .hamburger-icon:hover{
+.hamburger-icon:hover{
     color: #72e0eb;
   }
+
+

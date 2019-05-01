@@ -42,9 +42,26 @@ include_once("bootstrap.php");
 	</div>
 </div>
 <span class="hamburger-icon"onclick="openNav()">&#9776;</span>
+
+<h1>Drippeo.</h1>
 </div>
 
 
+
+
+
+
+
+
+
+<!---Footer--->
+<footer>
+        <p>	&copy; 2019 Drippeo</p>
+        <form>
+            <input type="email" placeholder="Email" required>
+            <button class="button">Sign up now</button>
+        </form>
+    </footer>
 
 <script>
 
