@@ -1,9 +1,10 @@
-<?php
+<?php 
 
   //Connectie klasses
-  include_once("bootstrap.php");
+include_once("bootstrap.php");
 
-
+// Controleren of we al ingelogd zijn
+User::checkLogin();
 
 ?>
 
