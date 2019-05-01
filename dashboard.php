@@ -17,7 +17,23 @@ include_once("bootstrap.php");
 <body>
 <?php include_once("includes/nav.inc.php") ;?>
 
-
+<div class="dashboard">
+  <div class='column'>
+    <div class='item'></div>
+    <div class='item'></div>
+    <div class='item'></div>
+  </div>
+  <div class='column'>
+    <div class='item'></div>
+    <div class='item'></div>
+    <div class='item'></div>
+  </div>
+  <div class='column'>
+    <div class='item'></div>
+    <div class='item'></div>
+    <div class='item'></div>
+  </div>
+</div>
 
 
 
@@ -38,5 +54,6 @@ function closeNav() {
 }
     </script>
     
+
 </body>
 </html>
