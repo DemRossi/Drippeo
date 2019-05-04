@@ -179,10 +179,6 @@ label {
   
   .form--btn {
     width: 100%;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
     display: flex;
     flex-wrap: wrap;
   }
@@ -192,11 +188,7 @@ label {
     color: #fff;
     line-height: 1.2;
     text-transform: uppercase;
-  
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
+    
     display: flex;
     justify-content: center;
     align-items: center;
