@@ -1,32 +1,7 @@
 <?php
-//Connectie klasses
 include_once 'bootstrap.php';
 
-    if (!empty($_POST)) {
-        // email en password opvragen
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-
-        //connectie databank
-        $conn = Db::getInstance();
-
-        // check of rehash van password gelijk is aan hash uit db
-        $statement = $conn->prepare('SELECT * from users where email = :email');
-        $statement->bindParam(':email', $email);
-        $result = $statement->execute();
-
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
-
-        if (password_verify($password, $user['password'])) {
-            // ja -> login
-            session_start();
-            $_SESSION['email'] = $email;
-            header('Location:index.php');
-        } else {
-            // nee -> error
-            $error = true;
-        }
-    }
+User::login();
 
 ?>
 
@@ -69,6 +44,11 @@ include_once 'bootstrap.php';
 						<div>
 							<a href="#" class="txt1">
 								Forgot?
+							</a>
+						</div>
+						<div>
+							<a href="register.php" class="txt1">
+								Register now
 							</a>
 						</div>
 					</div>

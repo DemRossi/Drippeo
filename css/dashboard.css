@@ -183,7 +183,7 @@ label {
     flex-wrap: wrap;
   }
   
-  .form--btn button{
+  .form--btn input{
     font-size: 16px;
     color: #fff;
     line-height: 1.2;

@@ -1,45 +1,40 @@
-<?php 
+<?php
 
 //Connectie klasses
-include_once("bootstrap.php");
+include_once 'bootstrap.php';
 
-if (!empty($_POST['submit'])){
-	// checked of alle velden leeg zijn of niet,als er 1 leeg is kan men niet registreren
-	if ( empty($_POST['email']) || empty($_POST['password']) || empty($_POST['firstname']) 
-	|| empty($_POST['lastname'])|| empty($_POST['username'])){
-		$error = true;
-	}
-	else {
-		// Gegevens in de klasse user steken
-		$user = new User ();
-		$user->setEmail($_POST['email']);
-		$user->setPassword($_POST['password']);
-		$user->setFirstName($_POST['firstName']);
-		$user->setLastName($_POST['lastName']);
+if (!empty($_POST['submit'])) {
+    // checked of alle velden leeg zijn of niet,als er 1 leeg is kan men niet registreren
+    if (empty($_POST['email']) || empty($_POST['password']) || empty($_POST['firstname'])
+    || empty($_POST['lastname']) || empty($_POST['username'])) {
+        $error = true;
+    } else {
+        // Gegevens in de klasse user steken
+        $user = new User();
+        $user->setEmail($_POST['email']);
+        $user->setPassword($_POST['password']);
+        $user->setFirstName($_POST['firstName']);
+        $user->setLastName($_POST['lastName']);
         $user->setStreet($_POST['street']);
         $user->setNumber($_POST['number']);
         $user->setCity($_POST['city']);
         $user->setPostalCode($_POST['postalCode']);
         $user->setPhone($_POST['phone']);
-		
-		if ($user->register()){
-			session_start();
-			$_SESSION['email'] = $email;
-			header('Location:index.php');
-		}
-		
-		/*
-Een session start met User, dit moet dan ook in de index controleren of
-de sessie gestart is of niet (if rond de register zetten)*/ 
-	
-	}}
+
+        if ($user->register()) {
+            session_start();
+            $_SESSION['email'] = $email;
+            header('Location:dashboard.php');
+        }
+    }
+}
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include_once("includes/head.inc.php") ;?>
+<?php include_once 'includes/head.inc.php'; ?>
     <title>Register</title>
 </head>
 <body>
@@ -99,9 +94,9 @@ de sessie gestart is of niet (if rond de register zetten)*/
 					
 					
 					<div class="form--btn">
-						<button >
-							Registreer
-						</button>
+					
+							<input type="submit" name="submit" value="Sign me up!" >	
+						
 					</div>
 
 				</form>
