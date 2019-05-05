@@ -259,6 +259,7 @@ label {
     font-size: 38px;
     margin-left: 30px;
     width: initial;
+    cursor: pointer;
 }
 
 #main {
@@ -269,7 +270,6 @@ label {
 .sub-nav {
     text-transform: uppercase;
     font-weight: 700;
-    cursor: pointer;
     transition: .3s;
     text-decoration: none;
     margin: 0 12px 0 12px;
