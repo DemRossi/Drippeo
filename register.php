@@ -20,9 +20,12 @@ if (!empty($_POST)) {
 
             if ($user->register()) {
                 //$user->login();
-                echo '😂';
+
+                $_SESSION['User'] = true;
+                // wss nog andere session gegevens toevoegen
+                header('Location: dashboard.php');
             } else {
-                echo '😢';
+                //echo '😢';
             }
         } catch (Exception $e) {
             $error = $e->getMessage();
@@ -32,35 +35,7 @@ if (!empty($_POST)) {
     }
 }
 
-// if (!empty($_POST['submit'])) {
-//     // checked of alle velden leeg zijn of niet,als er 1 leeg is kan men niet registreren
-//     if (empty($_POST['email']) || empty($_POST['password']) || empty($_POST['firstname'])
-//     || empty($_POST['lastname']) || empty($_POST['username'])) {
-//         $error = true;
-//     } else {
-//         // Gegevens in de klasse user steken
-//         $user = new User();
-//         $user->setEmail($_POST['email']);
-//         $user->setPassword($_POST['password']);
-//         $user->setFirstName($_POST['firstName']);
-//         $user->setLastName($_POST['lastName']);
-//         $user->setStreet($_POST['street']);
-//         $user->setNumber($_POST['number']);
-//         $user->setCity($_POST['city']);
-//         $user->setPostalCode($_POST['postalCode']);
-//         $user->setPhone($_POST['phone']);
-
-//         if ($user->register()) {
-//             session_start();
-//             $_SESSION['email'] = $email;
-//             header('Location:dashboard.php');
-//         }
-//     }
-// }
-
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 <?php include_once 'includes/head.inc.php'; ?>

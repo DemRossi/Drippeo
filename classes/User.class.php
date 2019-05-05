@@ -226,14 +226,14 @@
             }
         }
 
-        public function login()
-        {
-            if (!isset($_SESSION)) {
-                session_start();
-            }
-            $_SESSION['username'] = $this->email;
-            header('Location: index.php');
-        }
+        // public function login()
+        // {
+        //     if (!isset($_SESSION)) {
+        //         session_start();
+        //     }
+        //     $_SESSION['username'] = $this->email;
+        //     header('Location: index.php');
+        // }
 
         public static function findByEmail($email)
         {

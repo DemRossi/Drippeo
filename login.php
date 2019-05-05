@@ -1,11 +1,27 @@
 <?php
 include_once 'bootstrap.php';
 
-User::login();
+if (!empty($_POST)) {
+    $conn = Db::getInstance();
+    $email = htmlspecialchars($_POST['email']);
+    $password = $_POST['password'];
 
-?>
+    $statement = $conn->prepare('select * from users where email = :email');
+    $statement->bindParam(':email', $email);
+    $statement->execute();
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-<!DOCTYPE html>
+    if (password_verify($password, $user['password'])) {
+        session_start();
+        $_SESSION['User'] = true;
+        // wss nog andere session gegevens toevoegen
+        header('Location: dashboard.php');
+    } else {
+        $errorLogin = true;
+    }
+}
+
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 <?php include_once 'includes/head.inc.php'; ?>
@@ -16,7 +32,7 @@ User::login();
 <div class="limiter">
 		<div class="container">
 			<div class="wrap">
-				<form class="form">
+				<form class="form" method="post" action="">
 					<span class="form--title">
 						Login
 					</span>
