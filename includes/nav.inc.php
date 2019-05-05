@@ -27,5 +27,5 @@
 </div>
 <span class="hamburger-icon"onclick="openNav()">&#9776;</span>
 
-<a href="/ProductLab2/dashboard.php"><h1>Drippeo.</h1></a>
+<a href="dashboard.php"><h1>Drippeo.</h1></a>
 </div>
