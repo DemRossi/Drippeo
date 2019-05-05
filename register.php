@@ -3,18 +3,13 @@
 //Connectie klasses
 include_once 'bootstrap.php';
 
-if (!empty($_POST['submit'])) {
-    // checked of alle velden leeg zijn of niet,als er 1 leeg is kan men niet registreren
-    if (empty($_POST['email']) || empty($_POST['password']) || empty($_POST['firstname'])
-    || empty($_POST['lastname']) || empty($_POST['username'])) {
-        $error = true;
-    } else {
-        // Gegevens in de klasse user steken
+if (!empty($_POST)) {
+    try {
         $user = new User();
         $user->setEmail($_POST['email']);
         $user->setPassword($_POST['password']);
-        $user->setFirstName($_POST['firstName']);
-        $user->setLastName($_POST['lastName']);
+        $user->setFirstname($_POST['firstName']);
+        $user->setLastname($_POST['lastName']);
         $user->setStreet($_POST['street']);
         $user->setNumber($_POST['number']);
         $user->setCity($_POST['city']);
@@ -22,12 +17,41 @@ if (!empty($_POST['submit'])) {
         $user->setPhone($_POST['phone']);
 
         if ($user->register()) {
-            session_start();
-            $_SESSION['email'] = $email;
-            header('Location:dashboard.php');
+            //$user->login();
+            echo '😂';
+        } else {
+            echo '😢';
         }
+    } catch (Exception $e) {
+        $error = $e->getMessage();
     }
 }
+
+// if (!empty($_POST['submit'])) {
+//     // checked of alle velden leeg zijn of niet,als er 1 leeg is kan men niet registreren
+//     if (empty($_POST['email']) || empty($_POST['password']) || empty($_POST['firstname'])
+//     || empty($_POST['lastname']) || empty($_POST['username'])) {
+//         $error = true;
+//     } else {
+//         // Gegevens in de klasse user steken
+//         $user = new User();
+//         $user->setEmail($_POST['email']);
+//         $user->setPassword($_POST['password']);
+//         $user->setFirstName($_POST['firstName']);
+//         $user->setLastName($_POST['lastName']);
+//         $user->setStreet($_POST['street']);
+//         $user->setNumber($_POST['number']);
+//         $user->setCity($_POST['city']);
+//         $user->setPostalCode($_POST['postalCode']);
+//         $user->setPhone($_POST['phone']);
+
+//         if ($user->register()) {
+//             session_start();
+//             $_SESSION['email'] = $email;
+//             header('Location:dashboard.php');
+//         }
+//     }
+// }
 
 ?>
 
@@ -41,7 +65,7 @@ if (!empty($_POST['submit'])) {
 <div class="limiter">
 		<div class="container">
 			<div class="wrap">
-				<form class="form">
+				<form class="form" method="post" action="">
 					<span class="form--title">
 						Register
                     </span>
