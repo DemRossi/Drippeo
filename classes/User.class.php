@@ -203,16 +203,21 @@
 
         public function register()
         {
+            $password = Security::hash($this->password);
             try {
                 $conn = Db::getInstance();
                 //var_dump($conn->errorCode());
-                $statement = $conn->prepare('insert into users (`email`,`password`,`firstName`,`lastName`,`street`,`number`,`city`,`postalCode`,`phone`,`verbruikId`) values ("test@test.com", "qwerty", "test", "tester", "ergens", 45, "Antwerpen", 2000, 0475689951, "abcdef")');
+                $statement = $conn->prepare('insert into users (`email`,`password`,`firstName`,`lastName`,`street`,`number`,`city`,`postalCode`,`phone`,`verbruikId`) values (:email, :password, :firstname, :lastname, :street, :number, :city, :postalCode, :phone, "abcdef")');
                 $statement->bindParam(':email', $this->email);
+                $statement->bindParam(':password', $password);
                 $statement->bindParam(':firstname', $this->firstname);
                 $statement->bindParam(':lastname', $this->lastname);
-                $statement->bindParam(':username', $this->username);
-                $hash = password_hash($this->password, PASSWORD_BCRYPT);
-                $statement->bindParam(':password', $hash);
+                $statement->bindParam(':street', $this->street);
+                $statement->bindParam(':number', $this->number);
+                $statement->bindParam(':city', $this->city);
+                $statement->bindParam(':postalCode', $this->postalCode);
+                $statement->bindParam(':phone', $this->phone);
+
                 $result = $statement->execute();
 
                 return $result;
@@ -250,39 +255,6 @@
                 return true;
             } else {
                 return false;
-            }
-        }
-
-        public static function changePass($old, $new, $newComf, $userName)
-        {
-            try {
-                $conn = Db::getInstance();
-                $stmntPass = $conn->prepare('select * from users where username = :userName');
-                $stmntPass->bindParam(':userName', $userName);
-                $stmntPass->execute();
-                $user = $stmntPass->fetch(PDO::FETCH_ASSOC);
-
-                if (password_verify($old, $user['password'])) {
-                    //echo "binnen";
-                    if ($new == $newComf) {
-                        //echo "hetzelfde";
-                        $newPass = Security::hash($new);
-
-                        //$conn = Db::getInstance();
-                        $stmntPassCh = $conn->prepare('update users set `password` = :newPass where username = :userName');
-                        $stmntPassCh->bindParam(':newPass', $newPass);
-                        $stmntPassCh->bindParam(':userName', $userName);
-                        $resultPass = $stmntPassCh->execute();
-
-                        return $resultPass;
-                    } else {
-                        //echo "Wachtwoorden komen niet overeen";
-                    }
-                } else {
-                    //echo "Foutief wachtwoord";
-                }
-            } catch (Throwable $t) {
-                echo $t;
             }
         }
     }
