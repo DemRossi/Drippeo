@@ -4,26 +4,31 @@
 include_once 'bootstrap.php';
 
 if (!empty($_POST)) {
-    try {
-        $user = new User();
-        $user->setEmail($_POST['email']);
-        $user->setPassword($_POST['password']);
-        $user->setFirstname($_POST['firstName']);
-        $user->setLastname($_POST['lastName']);
-        $user->setStreet($_POST['street']);
-        $user->setNumber($_POST['number']);
-        $user->setCity($_POST['city']);
-        $user->setPostalCode($_POST['postalCode']);
-        $user->setPhone($_POST['phone']);
+    if (!empty($_POST['email']) || !empty($_POST['password']) || !empty($_POST['firstname']) || !empty($_POST['lastname'])
+        || !empty($_POST['street']) || !empty($_POST['number']) || !empty($_POST['city']) || !empty($_POST['postalCode'])) {
+        try {
+            $user = new User();
+            $user->setEmail($_POST['email']);
+            $user->setPassword($_POST['password']);
+            $user->setFirstname($_POST['firstName']);
+            $user->setLastname($_POST['lastName']);
+            $user->setStreet($_POST['street']);
+            $user->setNumber($_POST['number']);
+            $user->setCity($_POST['city']);
+            $user->setPostalCode($_POST['postalCode']);
+            $user->setPhone($_POST['phone']);
 
-        if ($user->register()) {
-            //$user->login();
-            echo '😂';
-        } else {
-            echo '😢';
+            if ($user->register()) {
+                //$user->login();
+                echo '😂';
+            } else {
+                echo '😢';
+            }
+        } catch (Exception $e) {
+            $error = $e->getMessage();
         }
-    } catch (Exception $e) {
-        $error = $e->getMessage();
+    } else {
+        $error = 'Gelieve alle verplichte velden in te vullen.';
     }
 }
 
@@ -69,7 +74,13 @@ if (!empty($_POST)) {
 					<span class="form--title">
 						Register
                     </span>
-                    
+                    <?php if (isset($error)): ?>
+				        <div class="form__error">
+                            <p>
+                                <?php echo $error; ?>
+                            </p>
+				</div>
+                <?php endif; ?>
 					<div class="form--input">
 						<input class="input" type="text" name="email" placeholder="Email">
 						<span class="input--focus"></span>
