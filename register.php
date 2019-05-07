@@ -20,15 +20,15 @@ if (!empty($_POST)) {
 
             if ($user->register()) {
                 //$user->login();
-
+                echo '🤞';
                 $_SESSION['User'] = true;
-                // wss nog andere session gegevens toevoegen
-                header('Location: dashboard.php');
+            // wss nog andere session gegevens toevoegen
+                // header('Location: dashboard.php');
             } else {
                 //echo '😢';
             }
-        } catch (Exception $e) {
-            $error = $e->getMessage();
+        } catch (Trowable $t) {
+            echo $t;
         }
     } else {
         $error = 'Gelieve alle verplichte velden in te vullen.';
@@ -57,48 +57,66 @@ if (!empty($_POST)) {
 				</div>
                 <?php endif; ?>
 					<div class="form--input">
-						<input class="input" type="text" name="email" placeholder="Email">
+						<input class="input" type="text" name="email" placeholder="Email" value="<?php if (isset($_POST['email'])) {
+    echo $_POST['email'];
+}?>">
 						<span class="input--focus"></span>
 					</div>
 					
 					
 					<div class="form--input">
-						<input class="input" type="password" name="password" placeholder="Password">
+						<input class="input" type="password" name="password" placeholder="Password" value="<?php if (isset($_POST['password'])) {
+    echo $_POST['password'];
+}?>">
 						<span class="input--focus"></span>
                     </div>
 
                     <div class="form--input">
-						<input class="input" type="text" name="firstName" placeholder="First Name">
+						<input class="input" type="text" name="firstName" placeholder="First Name" value="<?php if (isset($_POST['firstName'])) {
+    echo $_POST['firstName'];
+}?>">
 						<span class="input--focus"></span>
                     </div>
 
                     <div class="form--input">
-						<input class="input" type="text" name="lastName" placeholder="Last Name">
+						<input class="input" type="text" name="lastName" placeholder="Last Name" value="<?php if (isset($_POST['lastName'])) {
+    echo $_POST['lastName'];
+}?>">
 						<span class="input--focus"></span>
                     </div>
 
                     <div class="form--input">
-						<input class="input" type="text" name="street" placeholder="Street">
+						<input class="input" type="text" name="street" placeholder="Street" value="<?php if (isset($_POST['street'])) {
+    echo $_POST['street'];
+}?>">
 						<span class="input--focus"></span>
                     </div>
                     
                     <div class="form--input">
-						<input class="input" type="text" name="number" placeholder="Number">
+						<input class="input" type="text" name="number" placeholder="Number" value="<?php if (isset($_POST['number'])) {
+    echo $_POST['number'];
+}?>">
 						<span class="input--focus"></span>
                     </div>
                     
                     <div class="form--input">
-						<input class="input" type="text" name="city" placeholder="City">
+						<input class="input" type="text" name="city" placeholder="City" value="<?php if (isset($_POST['city'])) {
+    echo $_POST['city'];
+}?>">
 						<span class="input--focus"></span>
                     </div>
                     
                     <div class="form--input">
-						<input class="input" type="text" name="postalCode" placeholder="Postal Code">
+						<input class="input" type="text" name="postalCode" placeholder="Postal Code" value="<?php if (isset($_POST['postalCode'])) {
+    echo $_POST['postalCode'];
+}?>">
 						<span class="input--focus"></span>
                     </div>
                     
                     <div class="form--input">
-						<input class="input" type="text" name="phone" placeholder="Phone Number">
+						<input class="input" type="text" name="phone" placeholder="Phone Number" value="<?php if (isset($_POST['phone'])) {
+    echo $_POST['phone'];
+}?>">
 						<span class="input--focus"></span>
 					</div>
 					
