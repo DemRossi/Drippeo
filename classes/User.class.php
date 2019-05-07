@@ -1,7 +1,7 @@
 <?php
   //require_once("Security.class.php");
   //require_once("Db.class.php");
-  require_once 'bootstrap.php';
+  //require_once 'bootstrap.php';
 
     class User
     {
@@ -220,6 +220,7 @@
                 $statement->bindParam(':phone', $this->phone);
 
                 $result = $statement->execute();
+                self::setDetails();
 
                 return $result;
             } catch (Throwable $t) {
@@ -229,14 +230,47 @@
             }
         }
 
-        // public function login()
-        // {
-        //     if (!isset($_SESSION)) {
-        //         session_start();
-        //     }
-        //     $_SESSION['username'] = $this->email;
-        //     header('Location: index.php');
-        // }
+        private function setDetails()
+        {
+            // Getting database connection in class DB
+            $conn = DB::getInstance();
+            // Query for getting the user
+            $statement = $conn->prepare('SELECT * FROM users WHERE email = :email');
+            $statement->bindParam(':email', $this->email);
+            $statement->execute();
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+            $userDetails = [
+                'id' => $user['id'],
+                'firstname' => $user['firstName'],
+                'lastname' => $user['lastName'],
+                'email' => $user['email'],
+            ];
+            $_SESSION['user'] = $userDetails;
+        }
+
+        public function login()
+        {
+            $conn = Db::getInstance();
+            // $email = htmlspecialchars($_POST['email']);
+            // $password = $_POST['password'];
+
+            $statement = $conn->prepare('select * from users where email = :email');
+            $statement->bindParam(':email', $this->email);
+            $statement->execute();
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+            if (password_verify($this->password, $user['password'])) {
+                // wss nog andere session gegevens toevoegen
+                self::setDetails();
+
+                return true;
+            } else {
+                $errorLogin = true;
+
+                return false;
+            }
+        }
 
         public static function findByEmail($email)
         {

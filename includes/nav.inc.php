@@ -8,22 +8,22 @@
 	<div class="mobile-menu-items">
 	<span class="sub-nav profile"  onclick="closeNav()"href="/ProductLab2/profile.php">
 			<img src="images/header.jpg" alt="profile--image">
-			<p>Voornaam Achternaam</p>
+			<p><?php echo $_SESSION['user']['firstname'].' '.$_SESSION['user']['lastname']; ?></p>
 			
 		</span>
-		<a class="sub-nav"  onclick="closeNav()"href="dashboard.php">
+		<a class="sub-nav"  onclick="closeNav()"href="dashboard">
 			Dashboard
 		</a>
-		<a class="sub-nav " onclick="closeNav()"href='consumption.php'>
+		<a class="sub-nav " onclick="closeNav()"href='consumption'>
 			Consumption
         </a>
-        <a class="sub-nav " onclick="closeNav()"href='saving.php'>
+        <a class="sub-nav " onclick="closeNav()"href='saving'>
 			Consume less 
         </a>
-        <a class="sub-nav " onclick="closeNav()"href='settings.php'>
+        <a class="sub-nav " onclick="closeNav()"href='settings'>
 			Settings
 		</a>
-		<a class="sub-nav " onclick="closeNav()"href='logout.php'>
+		<a class="sub-nav " onclick="closeNav()"href='logout'>
 			Log out
 		</a>
 	</div>
