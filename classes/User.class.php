@@ -206,9 +206,9 @@
             $password = Security::hash($this->password);
             try {
                 $conn = Db::getInstance();
-                //echo $conn;
+                // echo $conn;
                 //var_dump($conn->errorCode());
-                $statement = $conn->prepare('insert into users (`email`,`password`,`firstName`,`lastName`,`street`,`number`,`city`,`postalCode`,`phone`,`consumption_id`) values (:email, :password, :firstname, :lastname, :street, :number, :city, :postalCode, :phone, 1)');
+                $statement = $conn->prepare('INSERT into users (`email`,`password`,`firstName`,`lastName`,`street`,`number`,`city`,`postalCode`,`phone`,`consumption_id`) values (:email, :password, :firstname, :lastname, :street, :number, :city, :postalCode, :phone, 1)');
                 $statement->bindParam(':email', $this->email);
                 $statement->bindParam(':password', $password);
                 $statement->bindParam(':firstname', $this->firstname);

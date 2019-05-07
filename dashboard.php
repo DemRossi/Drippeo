@@ -4,6 +4,7 @@
   include_once 'bootstrap.php';
 
   // Controleren of we al ingelogd zijn
+
   if (isset($_SESSION['user'])) {
       //logged in user
       //echo "😎";

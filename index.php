@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include_once("includes/head.inc.php") ;?>
+<?php include_once 'includes/head.inc.php'; ?>
     <title>Drippeo</title>
 </head>
 <body>
@@ -31,7 +31,7 @@
         </div>
  
         <div class="slogan">
-            <p>Drip<span class="punt">.</span> Drop<span class="punt">.</span> <br>make it stop<span class="punt">.</span></p>
+            <p>Drip<span class="punt">.</span> Drop<span class="punt">.</span> <br>Make it stop<span class="punt">.</span></p>
         </div>
         
         <div class="dashboard--link">
