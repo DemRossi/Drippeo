@@ -228,8 +228,7 @@
             $productCode = ProductValidation::checkProductCode($this->productCode);
             try {
                 $conn = Db::getInstance();
-                //echo $conn;
-                //print_r($conn);
+                // echo $conn;
                 //var_dump($conn->errorCode());
                 $statement = $conn->prepare('INSERT into users (`email`,`password`,`productcode_id`,`firstName`,`lastName`,`street`,`number`,`city`,`postalCode`,`phone`) values (:email, :password, :code, :firstname, :lastname, :street, :number, :city, :postalCode, :phone)');
                 $statement->bindParam(':email', $this->email);
