@@ -21,11 +21,11 @@ if (!empty($_POST)) {
 
             if ($user->register()) {
                 //$user->login();
-                echo '🤞';
-            //session_start();
+                //echo '🤞';
+                //session_start();
                 //$_SESSION['User'] = true;
                 // wss nog andere session gegevens toevoegen
-                //header('Location: dashboard.php');
+                header('Location: dashboard.php');
             } else {
                 //echo '😢';
             }
@@ -34,6 +34,10 @@ if (!empty($_POST)) {
         }
     } else {
         $error = 'Gelieve alle verplichte velden in te vullen.';
+    }
+    if (!empty($_SESSION['error']['message'])) {
+        $error = $_SESSION['error']['message'];
+        unset($_SESSION['error']);
     }
 }
 
