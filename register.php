@@ -119,6 +119,13 @@ if (!empty($_POST)) {
     echo $_POST['phone'];
 }?>">
 						<span class="input--focus"></span>
+                    </div>
+                    
+                    <div class="form--input">
+						<input class="input" type="text" name="consumptionCode" placeholder="Your product code" value="<?php if (isset($_POST['consumptionCode'])) {
+    echo $_POST['consumptionCode'];
+}?>">
+						<span class="input--focus"></span>
 					</div>
 					
 					

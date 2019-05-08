@@ -211,85 +211,85 @@ label {
   
 /*----NAVIGATIE-----*/
 .nav--container{
-    width: 100vw;
-    background-color: #f4f4f4;
-    height: 70px;
-    position: fixed;
-    z-index: 10000;
+  width: 100vw;
+  background-color: #f4f4f4;
+  height: 70px;
+  position: fixed;
+  z-index: 10000;
 }
 
 .nav--container h1{
-  text-align: center;
-  font-weight: 400;
-  font-size: 1.5em;
-  padding-top: 20px;
+text-align: center;
+font-weight: 400;
+font-size: 1.5em;
+padding-top: 20px;
 }
 /*Hamburger*/
 .sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 10000;
-    top: 0;
+  height: 100%;
+  width:  20%;
+  position: fixed;
+  z-index: 10000;
+  top: 0;
 
-    background-color: #f4f4f4;
-    overflow-x: hidden;
-    padding-top: 60px;
-    transition: 0.5s;
+  background-color: #f4f4f4;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
 }
 
 /* menu links */
 .sidenav a {
-    margin: 20px 0 0px 30px;
-    text-decoration: none;
-    font-size: 1em;
-    display: block;
-    transition: 0.3s;
-    width: 227px;
+  margin: 20px 0 0px 30px;
+  text-decoration: none;
+  font-size: 1em;
+  display: block;
+  transition: 0.3s;
+  width: 227px;
 
 }
 
 .sidenav a:hover, .offcanvas a:focus {
-    color: #72e0eb;
+  color: #72e0eb;
 }
 
 .sidenav .closebtn {
-    position: absolute;
-    top: -13px;
-    font-size: 38px;
-    margin-left: 30px;
-    width: initial;
-    cursor: pointer;
+  position: absolute;
+  top: -13px;
+  font-size: 38px;
+  margin-left: 30px;
+  width: initial;
+  cursor: pointer;
 }
 
 #main {
-    transition: margin-left .5s;
-    padding: 20px;
+  transition: margin-left .5s;
+  padding: 20px;
 }
 
 .sub-nav {
-    text-transform: uppercase;
-    font-weight: 700;
-    transition: .3s;
-    text-decoration: none;
-    margin: 0 12px 0 12px;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: .3s;
+  text-decoration: none;
+  margin: 0 12px 0 12px;
 }
 
 .hamburger-icon {
-    font-size: 32px;
-    color: #706f6f;
-    text-decoration: none;
-    position: fixed;
-    z-index: 1000;
-    margin-left: 30px;
-    top: 15px;
-    cursor: pointer;
-    display: inherit;
-  }
+  font-size: 32px;
+  color: #706f6f;
+  text-decoration: none;
+  position: fixed;
+  z-index: 1000;
+  margin-left: 30px;
+  top: 15px;
+  cursor: pointer;
+  display: inherit;
+}
 
 .hamburger-icon:hover{
-    color: #72e0eb;
-  }
+  color: #72e0eb;
+}
 
 .profile img{
   border-radius: 50px;
@@ -319,6 +319,7 @@ label {
   min-width: 200px;
   min-height: 500px;
   padding-top: 90px;
+  width: 100%;
 }
 
 .column {
@@ -336,6 +337,46 @@ label {
   min-width: 250px;
 }
 
+/*----SETTINGS----*/
+/*Contact*/
+.column__settings{
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-wrap: wrap;
+}
+
+.item__settings{
+  padding: 20px;
+  min-height: 300px;
+  min-width: 300px;
+}
+
+.item__settings h3{
+  padding:0 0 10px 0;
+}
+
+.form--input__settings{
+  padding: 0 0 10px 0;
+  margin-left: 15px;
+}
+.form--input__settings label{
+  font-size: 1em;
+  display: inline-block;
+  text-align: right;
+  width: 50%;
+
+}
+
+.form--input__settings input{
+  font-size: 0.7em;
+  padding:5px;
+  border: solid 1px;
+  line-height: 1.2; 
+  border-radius: 3px;
+}
+
+
 
 /* MediaQueries */
 
@@ -344,7 +385,10 @@ label {
 }
 
 @media screen and (min-width: 768px){
-
+  .dashboard {
+    margin-left: 20%;
+    width: 80%;
+}
 
 }
 @media screen and (min-width: 1200px){

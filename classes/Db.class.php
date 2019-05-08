@@ -16,14 +16,12 @@
             }
 
             $config = self::getConfig();
-            $host = $config['db_servername'];
             $database = $config['db_database'];
-            //$port = $config['db_port'];
             $user = $config['db_user'];
             $password = $config['db_password'];
 
             try {
-                self::$conn = new PDO('mysql:host='.$host.';dbname='.$database.';charset=utf8mb4', $user, $password);
+                self::$conn = new PDO('mysql:host=localhost;dbname='.$database.';charset=utf8mb4', $user, $password, null);
                 self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 return self::$conn;

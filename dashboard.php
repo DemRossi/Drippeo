@@ -41,10 +41,6 @@
 </div>
 
 
-
-
-
-
 <?php include_once 'includes/footer.inc.php'; ?>
 
 <script src="js/webNavigation.js"></script>
