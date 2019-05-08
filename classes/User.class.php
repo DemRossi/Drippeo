@@ -336,4 +336,43 @@
                 return false;
             }
         }
+
+        public function updateAccount()
+        {
+            $password = Security::hash($this->password);
+            $productCode = ProductValidation::checkProductCode($this->productCode);
+
+            try {
+                $conn = Db::getInstance();
+                $statement = $conn->prepare('UPDATE users SET email = :email , password = :password ,firstName = :firstname,lastName = :lastname,street= :street,number= :number,city= :city,postalCode= :postalcode, phone= :phone');
+                $statement->bindParam(':email', $this->email);
+                $statement->bindParam(':password', $password);
+                $statement->bindParam(':firstname', $this->firstname);
+                $statement->bindParam(':lastname', $this->lastname);
+                $statement->bindParam(':street', $this->street);
+                $statement->bindParam(':number', $this->number);
+                $statement->bindParam(':city', $this->city);
+                $statement->bindParam(':postalcode', $this->postalCode);
+                $statement->bindParam(':phone', $this->phone);
+
+                $result = $statement->execute();
+                self::setDetails();
+
+                return $result;
+            } catch (Throwable $t) {
+                echo $t;
+
+                return false;
+            }
+        }
+
+        public static function info($email)
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare('select * from users where email = :email ');
+            $statement->bindValue(':email', $email);
+            $statement->execute();
+
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        }
     }
