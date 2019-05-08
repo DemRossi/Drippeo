@@ -1,15 +1,16 @@
 <?php
 
 //Connectie klasses
-include_once 'bootstrap.php';
+require_once 'bootstrap/bootstrap.php';
 
 if (!empty($_POST)) {
-    if (!empty($_POST['email']) || !empty($_POST['password']) || !empty($_POST['firstname']) || !empty($_POST['lastname'])
+    if (!empty($_POST['email']) || !empty($_POST['password']) || !empty($_POST['productCode']) || !empty($_POST['firstname']) || !empty($_POST['lastname'])
         || !empty($_POST['street']) || !empty($_POST['number']) || !empty($_POST['city']) || !empty($_POST['postalCode'])) {
         try {
             $user = new User();
             $user->setEmail($_POST['email']);
             $user->setPassword($_POST['password']);
+            $user->setProductCode($_POST['productCode']);
             $user->setFirstname($_POST['firstName']);
             $user->setLastname($_POST['lastName']);
             $user->setStreet($_POST['street']);
@@ -68,6 +69,13 @@ if (!empty($_POST)) {
 					<div class="form--input">
 						<input class="input" type="password" name="password" placeholder="Password" value="<?php if (isset($_POST['password'])) {
     echo $_POST['password'];
+}?>">
+						<span class="input--focus"></span>
+                    </div>
+
+                    <div class="form--input">
+						<input class="input" type="text" name="productCode" placeholder="Product Code" value="<?php if (isset($_POST['productCode'])) {
+    echo $_POST['productCode'];
 }?>">
 						<span class="input--focus"></span>
                     </div>

@@ -7,6 +7,7 @@
     {
         private $email;
         private $password;
+        private $productCode;
         private $firstname;
         private $lastname;
         private $street;
@@ -57,6 +58,26 @@
         public function setPassword($password)
         {
             $this->password = $password;
+
+            return $this;
+        }
+
+        /**
+         * Get the value of productCode.
+         */
+        public function getProductCode()
+        {
+            return $this->productCode;
+        }
+
+        /**
+         * Set the value of productCode.
+         *
+         * @return self
+         */
+        public function setProductCode($productCode)
+        {
+            $this->productCode = $productCode;
 
             return $this;
         }
@@ -204,14 +225,16 @@
         public function register()
         {
             $password = Security::hash($this->password);
+            $productCode = ProductValidation::checkProductCode($this->productCode);
             try {
                 $conn = Db::getInstance();
                 //echo $conn;
                 //print_r($conn);
                 //var_dump($conn->errorCode());
-                $statement = $conn->prepare('INSERT into users (`email`,`password`,`firstName`,`lastName`,`street`,`number`,`city`,`postalCode`,`phone`,`consumption_id`) values (:email, :password, :firstname, :lastname, :street, :number, :city, :postalCode, :phone, 1)');
+                $statement = $conn->prepare('INSERT into users (`email`,`password`,`productcode_id`,`firstName`,`lastName`,`street`,`number`,`city`,`postalCode`,`phone`) values (:email, :password, :code, :firstname, :lastname, :street, :number, :city, :postalCode, :phone)');
                 $statement->bindParam(':email', $this->email);
                 $statement->bindParam(':password', $password);
+                $statement->bindParam(':code', $productCode['id']);
                 $statement->bindParam(':firstname', $this->firstname);
                 $statement->bindParam(':lastname', $this->lastname);
                 $statement->bindParam(':street', $this->street);
