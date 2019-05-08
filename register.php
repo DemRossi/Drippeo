@@ -21,11 +21,11 @@ if (!empty($_POST)) {
 
             if ($user->register()) {
                 //$user->login();
-                //echo '🤞';
-                //session_start();
+                echo '🤞';
+            //session_start();
                 //$_SESSION['User'] = true;
                 // wss nog andere session gegevens toevoegen
-                header('Location: dashboard.php');
+                //header('Location: dashboard.php');
             } else {
                 //echo '😢';
             }
@@ -128,15 +128,7 @@ if (!empty($_POST)) {
 }?>">
 						<span class="input--focus"></span>
                     </div>
-                    
-                    <div class="form--input">
-						<input class="input" type="text" name="consumptionCode" placeholder="Your product code" value="<?php if (isset($_POST['consumptionCode'])) {
-    echo $_POST['consumptionCode'];
-}?>">
-						<span class="input--focus"></span>
-					</div>
-					
-					
+				
 					<div class="form--btn">
 					
 							<input type="submit" name="submit" value="Sign me up!" >	

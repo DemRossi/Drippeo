@@ -2,7 +2,7 @@
 
 
 
-  window.addEventListener('resize', ()=>{
+  window.addEventListener('resize', (e)=>{
 
     let  mq = window.matchMedia("(min-width: 768px)");
 
@@ -11,11 +11,11 @@
       console.log('open');
      
     }else{
-    console.log('hamburger');
-     openNav();
-     closeNav();
+      console.log('hamburger');
+      openNav();
+      closeNav();
     }
-
+    e.preventDefault;
   });
 
   function openNav() {
