@@ -1,5 +1,5 @@
 <?php
     //setcookie("loggedin", "", time() -60*60);
-    session_start();
+    require_once 'bootstrap/bootstrap.php';
     session_destroy();
     header('Location: login.php');

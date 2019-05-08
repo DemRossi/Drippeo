@@ -1,7 +1,7 @@
 <?php
 
 //Connectie klasses
-include_once 'bootstrap.php';
+require_once 'bootstrap/bootstrap.php';
 
 if (!empty($_POST)) {
     if (!empty($_POST['email']) || !empty($_POST['password']) || !empty($_POST['productCode']) || !empty($_POST['firstname']) || !empty($_POST['lastname'])

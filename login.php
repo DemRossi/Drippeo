@@ -1,5 +1,5 @@
 <?php
-require_once 'bootstrap.php';
+require_once 'bootstrap/bootstrap.php';
 
 if (!empty($_POST)) {
     $user = new User();
