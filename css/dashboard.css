@@ -348,8 +348,8 @@ padding-top: 20px;
 
 .item__settings{
   padding: 20px;
-  min-height: 300px;
-  min-width: 300px;
+  min-height: 350px;
+  min-width: 350px;
 }
 
 .item__settings h3{
@@ -358,24 +358,26 @@ padding-top: 20px;
 
 .form--input__settings{
   padding: 0 0 10px 0;
-  margin-left: 15px;
 }
 .form--input__settings label{
   font-size: 1em;
   display: inline-block;
   text-align: right;
-  width: 50%;
+  width: 40%;
 
 }
 
 .form--input__settings input{
   font-size: 0.7em;
   padding:5px;
-  border: solid 1px;
+  background-color: #e6e6e6;
   line-height: 1.2; 
   border-radius: 3px;
 }
 
+.form--input__settings input[type=number]{
+  width: 15%;
+}
 
 
 /* MediaQueries */

@@ -57,13 +57,28 @@
             <form action="" method="post">
                 <h3>Product</h3>
                     <div class="form--input__settings">
-						<input class="input__settings" type="text" name="firstName" placeholder="First Name" value="<?php echo $_SESSION['user']['firstname']; ?>">
+                        <label for="email">Residents: </label>
+						<input class="input__settings" type="number" name="residents"  min="1" max="10">
                     </div>
                     <div class="form--input__settings">
-						<input class="input__settings" type="text" name="lastName" placeholder="Last Name" value="<?php echo $_SESSION['user']['lastname']; ?>">
+                         <label for="email">Showers: </label>
+						<input class="input__settings" type="number" name="showers"  min="1" max="10">
                     </div>
                     <div class="form--input__settings">
-				<input class="input__settings" type="text" name="email" placeholder="Email" value="<?php echo $_SESSION['user']['email']; ?>">
+                        <label for="email">Baths: </label>
+				        <input class="input__settings" type="number" name="baths"  min="1" max="10">
+                    </div>
+                    <div class="form--input__settings">
+                        <label for="email">Toilets: </label>
+				        <input class="input__settings" type="number" name="toilets"  min="1" max="10">
+                    </div>
+                    <div class="form--input__settings">
+                        <label for="email">Sink: </label>
+				        <input class="input__settings" type="number" name="sink"  min="1" max="10">
+                    </div>
+                    <div class="form--input__settings">
+                        <label for="email">Outside tap: </label>
+				        <input class="input__settings" type="number" name="outsideTap"  min="1" max="10">
                     </div>
             </form>
         </div>
