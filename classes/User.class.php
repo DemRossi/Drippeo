@@ -321,11 +321,11 @@
         public function updateAccount()
         {
             $password = Security::hash($this->password);
-            $productCode = ProductValidation::checkProductCode($this->productCode);
 
             try {
                 $conn = Db::getInstance();
-                $statement = $conn->prepare('UPDATE users SET email = :email , password = :password ,firstName = :firstname,lastName = :lastname,street= :street,number= :number,city= :city,postalCode= :postalcode, phone= :phone');
+                $statement = $conn->prepare('UPDATE users SET email = :email , password = :password ,firstName = :firstname,lastName = :lastname,street= :street,number= :number,city= :city,postalCode= :postalcode, phone= :phone WHERE id = :id');
+                $statement->bindParam(':id', $_SESSION['user']['id']);
                 $statement->bindParam(':email', $this->email);
                 $statement->bindParam(':password', $password);
                 $statement->bindParam(':firstname', $this->firstname);

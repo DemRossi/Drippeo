@@ -102,7 +102,7 @@
     </div>
 
     <!--footer-->
-    <footer>
+    <footer class="indexFooter">
         <p>	&copy; 2019 Drippeo</p>
         <form>
             <input type="email" placeholder="Email" required>

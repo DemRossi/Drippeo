@@ -10,7 +10,7 @@
       //echo "😎";
   } else {
       //no logged in user
-      header('Location: login.php');
+     // header('Location: login.php');
   }
 
 ?><!DOCTYPE html>

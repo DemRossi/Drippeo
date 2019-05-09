@@ -1,7 +1,7 @@
 <?php
     class ProductValidation
     {
-        public function checkProductCode($productId)
+        public static function checkProductCode($productId)
         {
             $conn = Db::getInstance();
 

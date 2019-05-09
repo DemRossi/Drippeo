@@ -15,23 +15,29 @@
   $data = User::info($_SESSION['user']['email']);
 
  if (isset($_POST['contactBtn'])) {
-     if ($_POST['oldpassword'] == $user['password']) {
-         try {
-             $user = new User();
-             $user->setEmail($_POST['email']);
-             $user->setPassword($_POST['newpassword']);
-             $user->setFirstname($_POST['firstName']);
-             $user->setLastname($_POST['lastName']);
-             $user->setStreet($_POST['street']);
-             $user->setNumber($_POST['number']);
-             $user->setCity($_POST['city']);
-             $user->setPostalCode($_POST['postalCode']);
-             $user->setPhone($_POST['phone']);
+     try {
+         $user = new User();
+         $user->setEmail($_POST['email']);
 
-             $user->updateAccount();
-         } catch (Trowable $t) {
-             echo $t;
+         // verrifie password
+         if (password_verify($data['password'], $_POST['oldPassword'])) {
+             echo 'veranderd passwoord';
+         //$user->setPassword($_POST['newPassword']);
+         } else {
+             echo 'oeps';
          }
+
+         $user->setFirstname($_POST['firstName']);
+         $user->setLastname($_POST['lastName']);
+         $user->setStreet($_POST['street']);
+         $user->setNumber($_POST['number']);
+         $user->setCity($_POST['city']);
+         $user->setPostalCode($_POST['postalCode']);
+         $user->setPhone($_POST['phone']);
+
+         $user->updateAccount();
+     } catch (Trowable $t) {
+         echo $t;
      }
  } elseif (isset($_POST['houseBtn'])) {
  }

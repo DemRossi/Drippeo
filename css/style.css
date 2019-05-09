@@ -290,13 +290,17 @@ padding-bottom: 30px;
 footer {
   background-color:#706f6f;
   height: 100px;
-  width: 100vw;
+  width: 80%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  margin-left: 20%;
 }
-
+.indexFooter{
+  width: 100vw;
+  margin-left:0;
+}
 footer p {
   color:#fff;
   text-align: center;

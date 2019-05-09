@@ -7,9 +7,7 @@ if (!empty($_POST)) {
     $user->setPassword($_POST['password']);
     if ($user->login()) {
         header('Location: dashboard.php');
-        echo '🤞';
     } else {
-        echo '🎂';
     }
 }
 

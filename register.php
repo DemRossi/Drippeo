@@ -21,11 +21,11 @@ if (!empty($_POST)) {
 
             if ($user->register()) {
                 //$user->login();
-                echo '🤞';
-            //session_start();
+                // echo '🤞';
+                //session_start();
                 //$_SESSION['User'] = true;
                 // wss nog andere session gegevens toevoegen
-                //header('Location: dashboard.php');
+                header('Location: dashboard.php');
             } else {
                 //echo '😢';
             }
