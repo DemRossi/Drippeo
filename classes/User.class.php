@@ -225,29 +225,48 @@
         public function register()
         {
             $password = Security::hash($this->password);
-            $productCode = ProductValidation::checkProductCode($this->productCode);
-            try {
-                $conn = Db::getInstance();
-                // echo $conn;
-                //var_dump($conn->errorCode());
-                $statement = $conn->prepare('INSERT into users (`email`,`password`,`productcode_id`,`firstName`,`lastName`,`street`,`number`,`city`,`postalCode`,`phone`) values (:email, :password, :code, :firstname, :lastname, :street, :number, :city, :postalCode, :phone)');
-                $statement->bindParam(':email', $this->email);
-                $statement->bindParam(':password', $password);
-                $statement->bindParam(':code', $productCode['id']);
-                $statement->bindParam(':firstname', $this->firstname);
-                $statement->bindParam(':lastname', $this->lastname);
-                $statement->bindParam(':street', $this->street);
-                $statement->bindParam(':number', $this->number);
-                $statement->bindParam(':city', $this->city);
-                $statement->bindParam(':postalCode', $this->postalCode);
-                $statement->bindParam(':phone', $this->phone);
+            $productCode = ProductValidation::getProductCode($this->productCode);
+            $noDouble = ProductValidation::preventDouble($productCode['id']);
+            //var_dump($test);
+            if (is_array($productCode)) {
+                // product code is terug gevonden in de db
+                if (is_array($noDouble)) {
+                    // product code is in gebruikt
+                    $_SESSION['error']['title'] = 'Foutive productcode';
+                    $_SESSION['error']['message'] = 'Deze product code is al reeds in gebruik. Probeer opnieuw of contacteer Drippeo.';
 
-                $result = $statement->execute();
-                self::setDetails();
+                    return false;
+                } else {
+                    // product code is niet in gebruik
+                    try {
+                        $conn = Db::getInstance();
+                        // echo $conn;
+                        //var_dump($conn->errorCode());
+                        $statement = $conn->prepare('INSERT into users (`email`,`password`,`productcode_id`,`firstName`,`lastName`,`street`,`number`,`city`,`postalCode`,`phone`) values (:email, :password, :code, :firstname, :lastname, :street, :number, :city, :postalCode, :phone)');
+                        $statement->bindParam(':email', $this->email);
+                        $statement->bindParam(':password', $password);
+                        $statement->bindParam(':code', $productCode['id']);
+                        $statement->bindParam(':firstname', $this->firstname);
+                        $statement->bindParam(':lastname', $this->lastname);
+                        $statement->bindParam(':street', $this->street);
+                        $statement->bindParam(':number', $this->number);
+                        $statement->bindParam(':city', $this->city);
+                        $statement->bindParam(':postalCode', $this->postalCode);
+                        $statement->bindParam(':phone', $this->phone);
 
-                return $result;
-            } catch (Throwable $t) {
-                echo $t;
+                        $result = $statement->execute();
+                        self::setDetails();
+
+                        return $result;
+                    } catch (Throwable $t) {
+                        echo $t;
+
+                        return false;
+                    }
+                }
+            } else {
+                $_SESSION['error']['title'] = 'Geen geldige product code';
+                $_SESSION['error']['message'] = 'Dit is geen geldige product code. Probeer opnieuw of contacteer Drippeo.';
 
                 return false;
             }
@@ -284,7 +303,7 @@
             $user = $statement->fetch(PDO::FETCH_ASSOC);
 
             if (password_verify($this->password, $user['password'])) {
-                // wss nog andere session gegevens toevoegen
+                // als wachtwoorden overeen komen -> alles van user ophalen uit db en in session steken
                 self::setDetails();
 
                 return true;
