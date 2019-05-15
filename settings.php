@@ -12,21 +12,25 @@
       header('Location: login.php');
   }
 
-  $data = User::info($_SESSION['user']['email']);
+$data = User::info($_SESSION['user']['email']);
+$dataProduct = Product::infoProduct($_SESSION['user']['id']);
 
  if (isset($_POST['contactBtn'])) {
      try {
          $user = new User();
          $user->setEmail($_POST['email']);
 
-         // verrifie password
-         if (password_verify($data['password'], $_POST['oldPassword'])) {
-             echo 'veranderd passwoord';
-         //$user->setPassword($_POST['newPassword']);
+         $passwordChange = User::changePassword($_POST['oldPassword'], $_SESSION['user']['id'], $_POST['newPassword']);
+         if ($passwordChange == true) {
+             echo 'jeej';
+         // $user->setPassword($_POST['newPassword']);
          } else {
-             echo 'oeps';
+             echo 'NO';
          }
 
+         $user->setEmail($_POST['email']);
+         $user->setPassword($_POST['password']);
+         $user->setProductCode($_POST['productCode']);
          $user->setFirstname($_POST['firstName']);
          $user->setLastname($_POST['lastName']);
          $user->setStreet($_POST['street']);
@@ -40,6 +44,22 @@
          echo $t;
      }
  } elseif (isset($_POST['houseBtn'])) {
+     try {
+         $product = new Product();
+         $product->setResidents($_POST['residents']);
+         $product->setShowers($_POST['showers']);
+         $product->setBaths($_POST['baths']);
+         $product->setToilets($_POST['toilets']);
+         $product->setSinks($_POST['sinks']);
+         $product->setOutside_tap($_POST['outsideTap']);
+
+         $product->productSettings($_SESSION['user']['id']);
+     } catch (Trowable $t) {
+         echo $t;
+     }
+ } elseif (isset($_POST['deleteBtn'])) {
+     User::deleteAccount($_SESSION['user']['id']);
+     header('Location: index.php');
  }
 
 ?><!DOCTYPE html>
@@ -57,7 +77,7 @@
         <div class="item__settings info">
             <img src="images/header.jpg" alt="profile--image">
             <p><?php echo $_SESSION['user']['firstname'].' '.$_SESSION['user']['lastname']; ?></p>
-            <p>Actief sinds ... </p>
+            
         </div>
 
     <div class="column__settings">  
@@ -103,12 +123,12 @@
                     </div>
                     <!--Oud passwoord-->
                     <div class="form--input__settings">
-                        <label for="email">Old password: </label>
+                        <label for="oldPassword">Old password: </label>
 				        <input class="input__settings" type="password" name="oldPassword" placeholder="Old password" >
                     </div>
                     <!--Nieuw passwoord-->
                     <div class="form--input__settings">
-                        <label for="email">New password: </label>
+                        <label for="newPassword">New password: </label>
 				        <input class="input__settings" type="password" name="newPassword" placeholder="New password" >
                     </div>
                     <div class="form--btn">
@@ -124,33 +144,43 @@
                 <h3>Product</h3>
                     <div class="form--input__settings">
                         <label for="email">Residents: </label>
-						<input class="input__settings" type="number" name="residents"  min="1" max="10">
+						<input class="input__settings" type="number" name="residents"  min="1" max="10" value="<?php echo $dataProduct['residents']; ?>">
                     </div>
                     <div class="form--input__settings">
                          <label for="email">Showers: </label>
-						<input class="input__settings" type="number" name="showers"  min="1" max="10">
+						<input class="input__settings" type="number" name="showers"  min="1" max="10" value="<?php echo $dataProduct['showers']; ?>">
                     </div>
                     <div class="form--input__settings">
                         <label for="email">Baths: </label>
-				        <input class="input__settings" type="number" name="baths"  min="1" max="10">
+				        <input class="input__settings" type="number" name="baths"  min="1" max="10" value="<?php echo $dataProduct['baths']; ?>">
                     </div>
                     <div class="form--input__settings">
                         <label for="email">Toilets: </label>
-				        <input class="input__settings" type="number" name="toilets"  min="1" max="10">
+				        <input class="input__settings" type="number" name="toilets"  min="1" max="10" value="<?php echo $dataProduct['toilets']; ?>">
                     </div>
                     <div class="form--input__settings">
                         <label for="email">Sink: </label>
-				        <input class="input__settings" type="number" name="sink"  min="1" max="10">
+				        <input class="input__settings" type="number" name="sinks"  min="1" max="10" value="<?php echo $dataProduct['sinks']; ?>">
                     </div>
                     <div class="form--input__settings">
                         <label for="email">Outside tap: </label>
-				        <input class="input__settings" type="number" name="outsideTap"  min="1" max="10">
+				        <input class="input__settings" type="number" name="outsideTap"  min="1" max="10" value="<?php echo $dataProduct['outside_tap']; ?>">
                     </div>
                     <div class="form--btn">
                           <button type="submit" name="houseBtn">Update</button>
                     </div>
             </form>
+            <form action="" method="post">
+            <div class="form--btn delete">
+                          <button type="submit" name="deleteBtn">Delete account</button>
+                    </div>
+            </form>
         </div>
+
+        
+         
+
+       
     </div>
 
     
@@ -159,5 +189,18 @@
 </div>
 <?php include_once 'includes/footer.inc.php'; ?>
 <script src="js/webNavigation.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+<script>
+
+$(document).ready(function(){
+$(".delete button").click(function (){
+    if (!confirm("Do you want to delete")){
+      return false;
+    }
+})
+})
+</script>
 </body>
 </html>

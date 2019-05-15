@@ -55,7 +55,6 @@
         <h2>About us <span class="punt">.</span>
             <hr>
         </h2>
-        
             <p> The problem is that we keep spending water without considering 
                 the impact on nature and its wealth. There are parts of the world that suffer from water shortage.
                  If we continue to use water as we do today, there is a risk that we will have a water <b> shortage of 40% by 2030.</b> </p>

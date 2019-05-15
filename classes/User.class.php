@@ -375,4 +375,30 @@
 
             return $statement->fetch(PDO::FETCH_ASSOC);
         }
+
+        public static function changePassword($old, $id, $new)
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare('select * from users where id= :id');
+            $statement->bindParam(':id', $id);
+            $statement->execute();
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+            if (!empty($old && $new)) {
+                if (password_verify($old, $user['password'])) {
+                    // als wachtwoorden overeen komen -> alles van user ophalen uit db en in session steken
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        public static function deleteAccount($id)
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare('DELETE FROM users WHERE id=:id;');
+            $statement->bindParam(':id', $id);
+            $statement->execute();
+        }
     }

@@ -344,6 +344,7 @@ padding-top: 20px;
   flex-direction: row;
   flex-grow: 1;
   flex-wrap: wrap;
+  padding-left: 20px;
 }
 
 .item__settings{
@@ -376,7 +377,7 @@ padding-top: 20px;
 }
 
 .form--input__settings input[type=number]{
-  width: 15%;
+  width: 20%;
 }
 .info{
   flex: 0 0 100%;
@@ -386,9 +387,10 @@ padding-top: 20px;
 .info img{
   width: 100px;
   border-radius: 50px;
+  margin-bottom: 10px;
 }
 .form--btn button{
-  width: 30%;
+  width: 50%;
   line-height: 1.2;
   text-transform: uppercase;
   color: white;
@@ -402,6 +404,14 @@ padding-top: 20px;
   margin-top: 10px;
 }
 
+.delete button{
+background-color: tomato;
+margin-top: 30px;
+}
+
+.delete button:hover{
+  background-color: rgb(199, 79, 58);
+  }
 /* MediaQueries */
 
 @media screen and (min-width: 600px){
