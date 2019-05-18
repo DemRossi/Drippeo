@@ -7,7 +7,7 @@
   <a  class="closebtn" onclick="closeNav()">&times;</a>
 	<div class="mobile-menu-items">
 	<span class="sub-nav profile"  onclick="closeNav()"href="/ProductLab2/profile.php">
-			<img src="images/header.jpg" alt="profile--image">
+			<img src="images/profilePic.svg" alt="profile--image">
 			<p><?php echo $_SESSION['user']['firstname'].' '.$_SESSION['user']['lastname']; ?></p>
 			
 		</span>

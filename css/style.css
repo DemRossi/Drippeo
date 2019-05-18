@@ -25,6 +25,16 @@ h2{
   font-weight: 400;
 }
 
+h3{
+  font-size: 1.4em;
+  font-weight: 300;
+}
+
+h4{
+  font-weight: 300;
+  font-size: 1em;
+}
+
 p{
   line-height: 1.4em;
   padding-bottom: 30px;

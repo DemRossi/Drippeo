@@ -21,7 +21,23 @@
 <body>
 <?php include_once 'includes/nav.inc.php'; ?>
 
+<div class="container_tips">
+<h2>Tips & Tricks</h2>
+    <div class="container_item column">
+        <h3>Your point this week</h3>
+        <h2></h2>
+    </div>
+    <div class="container_item column">
+        <h3>What others do</h3>
+        <p> To help you use less water, drippeo will compare your data with others. 
+    This way we can let you know how well or how badly you are doing.</p>
 
+    </div>
+    <div class="container_item column">
+        <h3>Some interesting links</h3>
+
+    </div>
+</div>
 
 
 

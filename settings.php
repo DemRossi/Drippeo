@@ -22,10 +22,10 @@ $dataProduct = Product::infoProduct($_SESSION['user']['id']);
 
          $passwordChange = User::changePassword($_POST['oldPassword'], $_SESSION['user']['id'], $_POST['newPassword']);
          if ($passwordChange == true) {
-             echo 'jeej';
-         // $user->setPassword($_POST['newPassword']);
+             //echo 'jeej';
+             $user->setPassword($_POST['newPassword']);
          } else {
-             echo 'NO';
+             // echo 'NO';
          }
 
          $user->setEmail($_POST['email']);
@@ -52,6 +52,8 @@ $dataProduct = Product::infoProduct($_SESSION['user']['id']);
          $product->setToilets($_POST['toilets']);
          $product->setSinks($_POST['sinks']);
          $product->setOutside_tap($_POST['outsideTap']);
+         $product->setDishwasher($_POST['dishwasher']);
+         $product->setWash_machine($_POST['washMachine']);
 
          $product->productSettings($_SESSION['user']['id']);
      } catch (Trowable $t) {
@@ -71,11 +73,11 @@ $dataProduct = Product::infoProduct($_SESSION['user']['id']);
 <body>
 <?php include_once 'includes/nav.inc.php'; ?>
 
-<div class="dashboard">
+<div class="settings">
   
 
         <div class="item__settings info">
-            <img src="images/header.jpg" alt="profile--image">
+            <img src="images/profilePic.svg" alt="profile--image">
             <p><?php echo $_SESSION['user']['firstname'].' '.$_SESSION['user']['lastname']; ?></p>
             
         </div>
@@ -165,6 +167,18 @@ $dataProduct = Product::infoProduct($_SESSION['user']['id']);
                     <div class="form--input__settings">
                         <label for="email">Outside tap: </label>
 				        <input class="input__settings" type="number" name="outsideTap"  min="1" max="10" value="<?php echo $dataProduct['outside_tap']; ?>">
+                    </div>
+                    <div class="form--input__settings">
+                        <label for="email">Washer: </label>
+				        <input class="input__settings" type="number" name="washMachine"  min="1" max="10" value="<?php echo $dataProduct['wash_machine']; ?>">
+                    </div>
+                    <div class="form--input__settings">
+                        <label for="email">Dishwasher: </label>
+				        <input class="input__settings" type="number" name="dishwasher"  min="1" max="10" value="<?php echo $dataProduct['dishwasher']; ?>">
+                    </div>
+                    <div class="form--input__settings">
+                        <label for="email">Your limit : </label>
+				        <input class="input__settings" type="number" name="limit" value="<?php echo $dataProduct['user_limit']; ?>"> <span> l/day</span>
                     </div>
                     <div class="form--btn">
                           <button type="submit" name="houseBtn">Update</button>
