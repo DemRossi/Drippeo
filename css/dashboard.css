@@ -434,7 +434,6 @@ margin-top: 30px;
   min-width: 250px;
   border: solid #F8F8F8 2px;
 
-
 }
 
 .item a,.item--2  a{
@@ -452,7 +451,7 @@ padding: 20px 0 0 20px;
   color:  rgba(127,206,255);
   }
 
-  .item p ,.item--2  p {
+.item p ,.item--2  p {
   padding: 10px 0 0 70px;
   }
 .form--dashboard{
@@ -519,16 +518,32 @@ padding: 20px 0 0 20px;
 /* ------- Tips & Tricks ------- */
 
 .container_tips{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  min-width: 200px;
+  min-height: 500px;
   padding-top: 90px;
   width: 100%;
-  background-color: white;
-
-
-}
-.container_item{
-  height: 200px;
 }
 
+.list{
+  width: 400px;
+  padding-left: 50px;
+ padding-top:20px;
+}
+.list li{
+  list-style-image: url('../images/li.svg');
+  padding-bottom: 10px;
+}
+
+.column--title{
+  width:100%;
+}
+
+.noBorder{
+  border: none;
+}
 /* MediaQueries */
 
 @media screen and (min-width: 600px){
@@ -552,11 +567,16 @@ padding: 20px 0 0 20px;
 .container_tips{
   margin-left: 20%;
   width: 80%;
+  
 }
 .container_item{
-  height: 200px;
   margin-left: 60px;
   width: 50%;
+  margin-top: 50px;
+}
+
+.container_item h3{
+ margin-bottom: 30px;
 }
 
 .container_item P{

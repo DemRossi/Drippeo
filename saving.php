@@ -22,20 +22,42 @@
 <?php include_once 'includes/nav.inc.php'; ?>
 
 <div class="container_tips">
-<h2>Tips & Tricks</h2>
-    <div class="container_item column">
-        <h3>Your point this week</h3>
-        <h2></h2>
+<div class="column column--title">
+<h2>Tips and Tricks</h2>
+</div>
+    <div class="column">
+    <div class='item noBorder'>
+        <h3>Some personal tips</h3>
+        <ul class="list">
+        <li></li>
+          <li></li>
+          <li></li>
+      </ul>
+</div>
     </div>
-    <div class="container_item column">
-        <h3>What others do</h3>
-        <p> To help you use less water, drippeo will compare your data with others. 
-    This way we can let you know how well or how badly you are doing.</p>
 
+    <div class="column">
+    <div class='item noBorder'>
+        <h3>Some general tips</h3>
+        <ul class="list">
+        <li>Try taking less baths. Did you know that with an average shower 
+           you use <span class="bold">40 to 55 liters </span>of water. A bathtub can contain up to <span class="bold">150 liters.</span></li>
+          <li>Replacing your old tap buttons with saving buttons can also save you a lot of water and money.</li>
+          <li>Dishwashers consume a lot of water. So make sure your dishwasher is always well stocked.</li>
+      </ul>
+</div>
     </div>
-    <div class="container_item column">
+    
+    
+    <div class="column">
+    <div class='item noBorder'>
         <h3>Some interesting links</h3>
-
+        <ul class="list">
+            <li><a href="https://www.dewatergroep.be/nl-be/drinkwater/veelgestelde-vragen/waterverbruik">De watergroep</a></li>
+            <li><a href="https://www.sdgs.be/nl/sdgs">SDGs</a></li>
+            <li><a href="https://www.epa.gov/watersense/how-we-use-water">Epa</a></li>
+</ul>
+        </div>
     </div>
 </div>
 

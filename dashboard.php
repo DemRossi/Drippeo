@@ -26,7 +26,9 @@
 <?php include_once 'includes/nav.inc.php'; ?>
 
 <div class="dashboard">
+<div class='column'>
   <h2>Welcome on your personal dashboard </h2>
+</div>
   <div class='column'>
     <div class='item'>
         <h3>Today's water</h3>
@@ -60,12 +62,11 @@
       <p>  <?php echo  $used; ?></p>
     </div>
     <div class="row">
-      <a href='saving.php'> <h3>Tips & Tricks</h3></a>
+      <a href='saving.php'> <h3>Personal tips & tricks</h3></a>
       <ul>
-        <li>Try taking less baths. Did you know that with an average shower 
-           you use <span class="bold">40 to 55 liters </span>of water. A bathtub can contain up to <span class="bold">150 liters.</span></li>
-          <li>Replacing your old tap buttons with saving buttons can also save you a lot of water and money.</li>
-          <li>Dishwashers consume a lot of water. So make sure your dishwasher is always well stocked.</li>
+        <li></li>
+          <li></li>
+          <li></li>
       </ul>
     </div>
    
@@ -80,8 +81,10 @@
  
   </div>
   <div class='column'>
-    <div class='item'></div>
-    <div class='item'></div>
+    <div class='item'>
+    <h3>What did you do today</h3>
+    </div>
+
     <div class='item'></div>
   </div>
 </div>

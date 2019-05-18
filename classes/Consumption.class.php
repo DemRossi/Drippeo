@@ -66,12 +66,14 @@ class Consumption
     {
         //Wasverbruik
 
-        if ($bathTimes > 3) {
+        if ($baths > 3) {
             $result = 'You take a lot of baths, it is ... % of your total use. If you take a shower more 
             it will cost you less';
         } elseif ($showerTime < 5) {
             $result = "It's great you're showers are less then 5 min. That way you save a lot of water";
         }
+
+        return $result;
     }
 
     public static function used($id)
@@ -83,5 +85,10 @@ class Consumption
         $used = $stm->fetch(PDO::FETCH_COLUMN);
 
         return  $used;
+    }
+
+    public static function price($id)
+    {
+        $used = self::used($id);
     }
 }

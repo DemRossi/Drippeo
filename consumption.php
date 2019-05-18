@@ -16,33 +16,28 @@
 <html lang="en">
 <head>
     <?php include_once 'includes/head.inc.php'; ?>
-    <title>Consumption</title>
+    <title>Comsumption</title>
 </head>
 <body>
 <?php include_once 'includes/nav.inc.php'; ?>
 
-<div class="dashboard">
-
-  <div class='column'>
-    <div class='item'>
-      <div id="vergelijking">
-      </div>
-
-    </div>
-
-
-
-  <div class='column'>
-    <div class='item'></div>
-    <div class='item'></div>
-    <div class='item'></div>
+<div class="container_tips">
+<div class="column column--title">
+<h2>Details</h2>
+</div>
+<div class="column">
+<div class='item--2'>
+  <div class="row">
+  <h3>Price estimate</h3>
+     </div>
+  <div class="row"> </div>
+</div>
+  <div class="item"> </div>
+  <div class="item">
   </div>
 </div>
-
-
-
-
-
+</div>
+</div>
 
 <?php include_once 'includes/footer.inc.php'; ?>
 <script src="js/webNavigation.js"></script>
@@ -50,6 +45,7 @@
 <script src="js/charts.js"></script>
 
 <script>
+  /*
    // VERGELIJKING
 google.charts.load('current', {packages: ['corechart', 'bar']});
 google.charts.setOnLoadCallback(drawBasic);
@@ -78,7 +74,7 @@ function drawBasic() {
       var chart = new google.visualization.BarChart(document.getElementById('vergelijking'));
 
       chart.draw(data, options);
-    }
+    }*/
   </script>
 </body>
 </html>
