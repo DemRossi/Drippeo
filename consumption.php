@@ -29,6 +29,7 @@
 <div class='item--2'>
   <div class="row">
   <h3>Price estimate</h3>
+  
      </div>
   <div class="row"> </div>
 </div>
