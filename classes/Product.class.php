@@ -227,7 +227,7 @@
         {
             $conn = Db::getInstance();
 
-            if ($_SESSION['user']['id'] == $id) {
+            if (self::infoProduct($id)) {
                 $statement = $conn->prepare('UPDATE product_settings SET residents= :residents, showers = :showers, baths = :baths, toilets = :toilets, sinks= :sinks, outside_tap= :outside_tap, wash_machine =:wash_machine, dishwasher=:dishwasher, user_limit=:user_limit WHERE `user_id` = :id');
                 $statement->bindParam(':id', $id);
                 $statement->bindParam(':residents', $this->residents);
@@ -243,23 +243,8 @@
                 $result = $statement->execute();
 
                 return $result;
-            // $statement = $conn->prepare('INSERT into product_settings (`user_id`,`residents`,`showers`,`baths`,`toilets`,`sinks`,`outside_tap`,`dishwasher`,`wash_machine`, `user_limit`) values (:userId, :residents, :showers, :baths, :toilets, :sinks, :outside_tap,:dishwasher,:wash_machine,:user_limit)');
-                // $statement->bindParam(':userId', $id);
-                // $statement->bindParam(':residents', $this->residents);
-                // $statement->bindParam(':showers', $this->showers);
-                // $statement->bindParam(':baths', $this->baths);
-                // $statement->bindParam(':toilets', $this->toilets);
-                // $statement->bindParam(':sinks', $this->sinks);
-                // $statement->bindParam(':outside_tap', $this->outside_tap);
-                // $statement->bindParam(':dishwasher', $this->dishwasher);
-                // $statement->bindParam(':wash_machine', $this->wash_machine);
-                // $statement->bindParam(':user_limit', $this->limit);
-
-                // $result = $statement->execute();
-
-                // return $result;
             } else {
-                $statement = $conn->prepare('INSERT into product_settings (`user_id`,`residents`,`showers`,`baths`,`toilets`,`sinks`,`outside_tap`,`dishwasher`,`wash_machine`) values (:userId, :residents, :showers, :baths, :toilets, :sinks, :outside_tap,:dishwasher,:wash_machine)');
+                $statement = $conn->prepare('INSERT into product_settings (`user_id`,`residents`,`showers`,`baths`,`toilets`,`sinks`,`outside_tap`,`dishwasher`,`wash_machine`, `user_limit`) VALUES (:userId, :residents, :showers, :baths, :toilets, :sinks, :outside_tap,:dishwasher,:wash_machine,:user_limit)');
                 $statement->bindParam(':userId', $id);
                 $statement->bindParam(':residents', $this->residents);
                 $statement->bindParam(':showers', $this->showers);
@@ -269,6 +254,7 @@
                 $statement->bindParam(':outside_tap', $this->outside_tap);
                 $statement->bindParam(':dishwasher', $this->dishwasher);
                 $statement->bindParam(':wash_machine', $this->wash_machine);
+                $statement->bindParam(':user_limit', $this->limit);
 
                 $result = $statement->execute();
 
