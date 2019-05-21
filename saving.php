@@ -11,6 +11,7 @@
       //no logged in user
       header('Location: login.php');
   }
+  $badkamerTips = Consumption::badkamer($_SESSION['user']['id']);
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -29,7 +30,7 @@
     <div class='item noBorder'>
         <h3>Some personal tips</h3>
         <ul class="list">
-        <li></li>
+        <li><?php echo $badkamerTips; ?></li>
           <li></li>
           <li></li>
       </ul>

@@ -57,23 +57,34 @@ class Consumption
         return $result;
     }
 
-    public static function vergelijking($id)
+    public static function badkamer($id)
     {
-        // weekverbruik
-    }
+        $conn = Db::getInstance();
+        //bad gebruik
+        /*
+         $stm = $conn->prepare('');
+         $stm->bindValue(':id', $id);
+         $stm->execute();
+         $baths = $stm->fetch(PDO::FETCH_COLUMN);*/
 
-    public static function wassen($id)
-    {
-        //Wasverbruik
+        //douche gebruik
+        $statement = $conn->prepare("select comsumption.duration 
+        from users,actions,comsumption,action_list,productcode 
+        where users.id=:id  and actions.user_id = users.id and action_list.name LIKE ' % shower % '
+        and users.productcode_id= productcode.id and comsumption.productcode = productcode.productCode");
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+        $showerTime = $statement->fetch(PDO::FETCH_COLUMN);
 
-        if ($baths > 3) {
-            $result = 'You take a lot of baths, it is ... % of your total use. If you take a shower more 
-            it will cost you less';
-        } elseif ($showerTime < 5) {
+        /* if ($baths > 3) {
+             $result = 'You take a lot of baths. If you take a shower more it will cost you less';
+         } else */if ($showerTime < 5) {
             $result = "It's great you're showers are less then 5 min. That way you save a lot of water";
+        } elseif ($showerTime > 10) {
+            $result = 'Shower times taking more than 10 min. Try to shorten them';
+        } else {
+            return $result;
         }
-
-        return $result;
     }
 
     public static function used($id)
@@ -87,8 +98,32 @@ class Consumption
         return  $used;
     }
 
-    public static function price($id)
+    public static function dailyActions($id)
     {
-        $used = self::used($id);
+        $conn = Db::getInstance();
+        $time = date('Y/m/d');
+        $stm = $conn->prepare("select action_list.icon,action_list.name from actions,action_list where actions.user_id = :id and actions.date = $time");
+        $stm->bindValue(':id', $id);
+
+        $stm->execute();
+        $actions = $stm->fetchAll(pdo::FETCH_ASSOC);
+
+        return  $actions;
+    }
+
+    public static function vergelijking($id)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare('select product_settings.residents from product_settings where product_settings.user_id = :id');
+        $statement->bindValue(':id', $id);
+        $aantal = $statement->fetch(PDO::FETCH_COLUMN);
+
+        $stm = $conn->prepare('select comsumption.avg from comsumption,product_settings where product_settings.residents = :aantal');
+        $stm->bindValue(':id', $id);
+        $stm->bindValue(':aantal', $aantal);
+        $stm->execute();
+        $andere = $stm->fetchAll(pdo::FETCH_ASSOC);
+
+        return 'help';
     }
 }

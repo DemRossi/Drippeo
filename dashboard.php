@@ -15,6 +15,13 @@
  $table = Consumption::limit($_SESSION['user']['id']);
  $used = Consumption::tips($_SESSION['user']['id']);
  $totalUsed = Consumption::used($_SESSION['user']['id']);
+ $actions = Consumption::dailyActions($_SESSION['user']['id']);
+
+ if ($totalUsed == '') {
+     $totalUsed = 0;
+ } else {
+     $totalUsed = Consumption::used($_SESSION['user']['id']);
+ }
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -63,11 +70,7 @@
     </div>
     <div class="row">
       <a href='saving.php'> <h3>Personal tips & tricks</h3></a>
-      <ul>
-        <li></li>
-          <li></li>
-          <li></li>
-      </ul>
+      
     </div>
    
   </div>
@@ -83,6 +86,11 @@
   <div class='column'>
     <div class='item'>
     <h3>What did you do today</h3>
+    <ul>
+        <?php foreach ($actions as $a):?>
+          <img src="<?php echo $a['icon']; ?>" class="icon"><p><?php echo $a['name']; ?></p>
+        <?php endforeach; ?>
+      </ul>
     </div>
 
     <div class='item'></div>
@@ -105,8 +113,8 @@
 
         var data = google.visualization.arrayToDataTable([
           ['Water limit', 'Liters'],
-          ['Rest', 100-80/<?php echo  $table; ?>*100],
-          ['Used', 80/<?php echo  $table; ?>*100]
+          ['Rest', 100- <?php echo  $totalUsed; ?> / <?php echo  $table; ?>*100],
+          ['Used', <?php echo  $totalUsed; ?> / <?php echo  $table; ?>*100]
         ]);
 
         var options = {

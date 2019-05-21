@@ -544,6 +544,10 @@ padding: 20px 0 0 20px;
 .noBorder{
   border: none;
 }
+
+.icon{
+  width: 20px;
+}
 /* MediaQueries */
 
 @media screen and (min-width: 600px){

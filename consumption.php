@@ -12,6 +12,11 @@
       header('Location: login.php');
   }
 
+$actions = Consumption::dailyActions($_SESSION['user']['id']);
+$table = Consumption::limit($_SESSION['user']['id']);
+$used = Consumption::tips($_SESSION['user']['id']);
+$totalUsed = Consumption::used($_SESSION['user']['id']);
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,10 +33,18 @@
 <div class="column">
 <div class='item--2'>
   <div class="row">
-  <h3>Price estimate</h3>
-  
+    <h3>What did you do today</h3>
+    <ul>
+        <?php foreach ($actions as $a):?>
+          <img src="<?php echo $a['icon']; ?>" class="icon"><p><?php echo $a['name']; ?></p>
+        <?php endforeach; ?>
+      </ul>
+
      </div>
-  <div class="row"> </div>
+  <div class="row">
+
+    
+     </div>
 </div>
   <div class="item"> </div>
   <div class="item">

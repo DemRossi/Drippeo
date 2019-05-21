@@ -5,6 +5,7 @@
   margin:0;
   padding:0;
   color:#706f6f;
+  line-height: 1.4em;
 }
 
 .clearfix:after {
@@ -36,7 +37,7 @@ h4{
 }
 
 p{
-  line-height: 1.4em;
+ 
   padding-bottom: 30px;
 }
 
