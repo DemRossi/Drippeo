@@ -54,6 +54,7 @@ $dataProduct = Product::infoProduct($_SESSION['user']['id']);
          $product->setOutside_tap($_POST['outsideTap']);
          $product->setDishwasher($_POST['dishwasher']);
          $product->setWash_machine($_POST['washMachine']);
+         $product->setLimit($_POST['limit']);
 
          $product->productSettings($_SESSION['user']['id']);
      } catch (Trowable $t) {

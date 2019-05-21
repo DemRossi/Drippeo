@@ -18,7 +18,7 @@
  $actions = Consumption::dailyActions($_SESSION['user']['id']);
 
   if ($table == 0) {
-      $noLimit = 'You need to set your limit first before you can use this functionality';
+      $noLimit = 'You need to set your limit in settings first before you can use this functionality';
   }
 
  if ($totalUsed == '') {
