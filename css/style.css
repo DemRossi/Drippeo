@@ -96,8 +96,8 @@ header {
 
 .logo {
   float: left;
-  padding: 30px 0 0 60px;
-  margin-left: -40px;
+  padding: 30px 0 0 30px;
+
 
 }
 
@@ -190,25 +190,27 @@ nav {
 }
 
 .slogan {
-  padding: 150px 0 80px 60px;
-  margin-left: 20px;
-  margin-top: 60px;
+  padding: 100px 0 70px 60px;
+    margin-left: 20px;
+    margin-top: 60px;
 
 }
-
+.pijl{
+  display: none;
+}
 .slogan p {
-  font-size: 4em;
+  font-size: 3.5em;
   line-height: 1.3em;
 }
 
 .dashboard--link {
   margin-top: -60px;
-  margin-left: 100px;
+  margin-left: 60px;
   border-radius: 40px;
   background-color: white;
   height: 50px;
-  width: 310px;
-  padding: 10px 0 10px 17px;
+  width: 250px;
+  padding: 13px 0 9px 5px;
   vertical-align: baseline;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
@@ -229,73 +231,48 @@ nav {
   margin-left: 10px;
 }
 
-.dashboard--link:after {
-  content: "";
-  display: inline-block;
-  height: 10px;
-  width: 30px;
-  margin-left: 20px;
-}
+
 
 .dashboardline {
   width: 2px;
   height: 50px;
   position: absolute;
   background-color: #72E0EB;
-  margin-left: 86px;
+  margin-left: 50px;
   margin-top: -60px;
   display: inline-block;
   border: 0;
 }
 
-.pijl {
-  margin-left: 20px;
-}
 
-.scroll {
-  float: right;
-  margin-top: 20px;
-  margin-right: -120px;
-}
 
-.scroll hr {
-  margin-top: -40px;
-  background-color: #6F6F6E;
-  border: 0;
-  width: 2px;
-  height: 400px;
-  display: inline-block;
-  margin-left: 10px;
-}
 
 .socials {
-  padding-right: 20px;
-  margin-right: 20px;
-  margin-left: 100px;
-  margin-top: 40px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: center;
+  column-gap: 40px;
+  margin-top: 50px;
+ 
 }
-
 .socials img {
-  margin-left: 40px;
-  height: 44px;
-  width: 44px;
-  margin-top: 70px;
+  width: 40px;
+
 }
 
-.scroll p {
-  transform-origin: 0 0;
-  transform: rotate(-90deg);
+.scroll{
+  display: none;
 }
-
 /* Stop Header */
 
 /*Over Ons*/
 
 .overOns {
   height: 100vh;
-  padding: 50px 0 0 50px;
-  width: 400px;
+  padding: 50px 30px 0 50px;
   z-index: 1;
+  width: 100%;
+  margin-bottom: 45px;
 }
 
 .blue {
@@ -308,6 +285,10 @@ nav {
   font-weight: bolder;
 }
 
+/*.abouttekst{
+width: 300px;
+
+}*/
 .overOns hr {
   border: 0;
   height: 3px;
@@ -318,7 +299,6 @@ nav {
 }
 
 #phoneimg{
-  width: 400px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: -86px;
@@ -343,15 +323,14 @@ nav {
 
 .product {
   height: 100vh;
-  padding: 50px 0 0 50px;
+  padding: 50px 30px 0 50px;
   z-index: 1;
   background-color: #EDF1F4;
+  width: 100%;
  
 }
 
-.producttekst{
-  width: 400px;
-}
+
 
 .product hr {
   border: 0;
@@ -383,6 +362,7 @@ nav {
 
 .contact {
   padding: 50px 0 0 50px;
+  height: 100vh;
 }
 
 .contact hr {
@@ -525,10 +505,23 @@ footer form button {
     margin-left: 40px;
     font-weight: 300;
   }
+  .pijl {
+    margin-left: 20px;
+    display: inline-block;
+  }
+  
 
   .dashboardline {
     margin-left: 190px;
     margin-top: -70px;
+  }
+
+  .dashboard--link:after {
+    content: "";
+    display: inline-block;
+    height: 10px;
+    width: 30px;
+    margin-left: 20px;
   }
 
   .scroll hr {
@@ -579,13 +572,13 @@ footer form button {
     font-weight: 300;
   }
 
-  .abouttekst {
+ .abouttekst {
     width: 650px;
   }
 
   .overOns {
     height: 100vh;
-    margin-left :100px;
+    padding-left: 100px;
   }
 
   #phoneimg{
@@ -607,6 +600,7 @@ float :left;
  .producttekst{
     float:right;
     text-align: right;
+    width: 400px;
   }
 
   .product hr {
@@ -659,6 +653,7 @@ float :left;
     grid-template-columns: auto auto auto auto;
     padding: 30px;
     grid-column-gap: 50px;
+    width: 600px;
 
   }
   
@@ -674,7 +669,26 @@ float :left;
   }
 
   .info--index{ 
-   
     background-size: 1000px;
   }
+  .scroll {
+    float: right;
+    margin-top: 20px;
+    margin-right: -120px;
+  }
+  
+  .scroll hr {
+    margin-top: -40px;
+    background-color: #6F6F6E;
+    border: 0;
+    width: 2px;
+    height: 400px;
+    display: inline-block;
+    margin-left: 10px;
+  }
+  .scroll p {
+    transform-origin: 0 0;
+    transform: rotate(-90deg);
+  }
+  
 }

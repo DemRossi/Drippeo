@@ -7,7 +7,7 @@
 <body>
 
     <!--header-->
-    <div class="container--header">
+   <div class="container--header">
             <div class="hero"></div>
     <header>
         <div class="navWrapper" >
@@ -74,10 +74,10 @@
                 <img src="images/icons/icon2.svg">
                 <img src="images/icons/icon3.svg">
                 <img src="images/icons/icon4.svg">
-                <div><h4>Smart Technology</h4><p></p></div>
-                <div><h4>Tips and Tricks</h4><p></p></div>
-                <div><h4>Compare with others</h4><p></p></div>
-                <div><h4>Charts</h4><p></p></div>
+                <div><h4>Smart Technology</h4></div>
+                <div><h4>Tips and Tricks</h4></div>
+                <div><h4>Compare with others</h4></div>
+                <div><h4>Charts</h4></div>
                 
 </div>
     </div>
