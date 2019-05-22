@@ -272,7 +272,7 @@ nav {
   padding: 50px 30px 0 50px;
   z-index: 1;
   width: 100%;
-  margin-bottom: 45px;
+  margin-bottom: 70px;
 }
 
 .blue {
@@ -397,13 +397,27 @@ width: 300px;
 .inputField {
   background-color: #F2F2F2;
   width: 95%;
-  height: 28px;
+  height: 35px;
   border-radius: 30px;
-  padding-left: 10px;
+  padding-left: 20px;
   margin-top: 10px;
   margin-bottom: 20px;
   border: 1px solid #ffffff;
   outline: none;
+}
+
+.textarea{
+  height: 50px;
+  height: 50px;
+  padding: 10px 0 0 20px;
+}
+
+.contactForm input[type=submit]{
+  width: 40%;
+  height: 25px;
+  border-radius: 30px;
+ color:white;
+ background-color: #72E0EB;
 }
 
 /* Start Footer */
@@ -600,7 +614,7 @@ float :left;
  .producttekst{
     float:right;
     text-align: right;
-    width: 400px;
+    width: 415px;
   }
 
   .product hr {
@@ -650,15 +664,19 @@ float :left;
   }
   .icon-div{
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: 200px 200px 200px 200px;
     padding: 30px;
     grid-column-gap: 50px;
-    width: 600px;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
 
   }
   
   .icon-div img{
     height: 150px;
+    margin-left: auto;
+    margin-right: auto;
 
 
   }
@@ -689,6 +707,10 @@ float :left;
   .scroll p {
     transform-origin: 0 0;
     transform: rotate(-90deg);
+  }
+  .contactForm input[type=submit]{
+    width: 20%;
+
   }
   
 }

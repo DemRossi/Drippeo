@@ -114,8 +114,9 @@
                         <input type="text" placeholder="What's your question about?" name="onderwerp" class="inputField">
                 </div>
                 <div class="form__veld">
-                        <textarea type="text" placeholder="Write your message right here" name="bericht" class="inputField"></textarea>
+                        <textarea type="text" placeholder="Write your message right here" name="bericht" class="inputField textarea"></textarea>
                 </div>
+                <input type="submit">
             </form>
             
     </div>
