@@ -17,6 +17,10 @@
  $totalUsed = Consumption::used($_SESSION['user']['id']);
  $actions = Consumption::dailyActions($_SESSION['user']['id']);
 
+  if ($table == 0) {
+      $noLimit = 'You need to set your limit in settings first before you can use this functionality';
+  }
+
  if ($totalUsed == '') {
      $totalUsed = 0;
  } else {
@@ -63,10 +67,16 @@
   <div class='column'>
   <div class='item--2'>
     <div class="row">
-      <h3 class="warning">Warning</h3>
-      <h4>Your limit</h4>
-      <p>You already used <?php echo  number_format(($totalUsed / $table) * 100, 2, '.', ''); ?>  % of your own limit. </p>
-      <p>  <?php echo  $used; ?></p>
+ 			<?php if (isset($noLimit)) :  ?>
+				<h3 class="warning">Warning</h3>
+				<h4>Your limit</h4>
+				<p><?php echo $noLimit; ?></p>
+			<?php else:  ?>
+      	<h3 class="warning">Warning</h3>
+      	<h4>Your limit</h4>
+      	<p>You already used <?php echo  number_format(($totalUsed / $table) * 100, 2, '.', ''); ?>  % of your own limit. </p>
+      	<p>  <?php echo  $used; ?></p>
+			<?php endif; ?>
     </div>
     <div class="row">
       <a href='saving.php'> <h3>Personal tips & tricks</h3></a>
