@@ -14,8 +14,9 @@
   }
  $table = Consumption::limit($_SESSION['user']['id']);
  $used = Consumption::tips($_SESSION['user']['id']);
- $totalUsed = Consumption::used($_SESSION['user']['id']);
+ $totalUsed = Consumption::calcTotalDay();
  $actions = Consumption::dailyActions($_SESSION['user']['id']);
+ $raw = Consumption::dataToday($_SESSION['user']['productcode']);
 
   if ($table == 0) {
       $noLimit = 'You need to set your limit in settings first before you can use this functionality';
@@ -24,9 +25,8 @@
  if ($totalUsed == '') {
      $totalUsed = 0;
  } else {
-     $totalUsed = Consumption::used($_SESSION['user']['id']);
+     $totalUsed = Consumption::calcTotalDay();
  }
-
 ?><!DOCTYPE html>
 <html lang="en">
 <head>

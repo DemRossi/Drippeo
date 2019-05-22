@@ -277,7 +277,7 @@
             // Getting database connection in class DB
             $conn = Db::getInstance();
             // Query for getting the user
-            $statement = $conn->prepare('SELECT * FROM users WHERE email = :email');
+            $statement = $conn->prepare('SELECT * FROM productcode_user WHERE email = :email');
             $statement->bindParam(':email', $this->email);
             $statement->execute();
             $user = $statement->fetch(PDO::FETCH_ASSOC);
@@ -287,6 +287,7 @@
                 'firstname' => $user['firstName'],
                 'lastname' => $user['lastName'],
                 'email' => $user['email'],
+                'productcode' => $user['productCode'],
             ];
             $_SESSION['user'] = $userDetails;
         }

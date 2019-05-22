@@ -87,6 +87,32 @@ class Consumption
         }
     }
 
+    // get data of today
+    public function dataToday($productCode)
+    {
+        $conn = Db::getInstance();
+        $stmnt = $conn->prepare('SELECT comsumption.productcode,`avg`,`duration`, `date`,productcode_user.email FROM `comsumption`,productcode_user WHERE (DATE(`date`) = CURDATE()) && (comsumption.productcode = :productCode) && (productcode_user.productCode = comsumption.productcode)');
+        $stmnt->bindParam(':productCode', $productCode);
+        $stmnt->execute();
+
+        $result = $stmnt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    public static function calcTotalDay()
+    {
+        $raw = self::dataToday($_SESSION['user']['productcode']);
+        $totals = 0;
+        for ($i = 0; $i < count($raw); ++$i) {
+            $dur = $raw[$i]['duration'] / 3600;
+            $total = $raw[$i]['avg'] * $dur;
+            $totals += $total;
+        }
+
+        return $totals;
+    }
+
     public static function used($id)
     {
         $conn = Db::getInstance();
@@ -106,7 +132,7 @@ class Consumption
         $stm->bindValue(':id', $id);
 
         $stm->execute();
-        $actions = $stm->fetchAll(pdo::FETCH_ASSOC);
+        $actions = $stm->fetchAll(PDO::FETCH_ASSOC);
 
         return  $actions;
     }
@@ -122,7 +148,7 @@ class Consumption
         $stm->bindValue(':id', $id);
         $stm->bindValue(':aantal', $aantal);
         $stm->execute();
-        $andere = $stm->fetchAll(pdo::FETCH_ASSOC);
+        $andere = $stm->fetchAll(PDO::FETCH_ASSOC);
 
         return 'help';
     }
