@@ -135,7 +135,7 @@
           },
 		      pieHole: 0.35,
 		      pieSliceBorderColor: "none",
-          colors: ['#f4f4f4','#72e0eb' ],
+          colors: ['#72e0eb','#f4f4f4' ],
 		      legend: {
 			    position: "none"	
           },

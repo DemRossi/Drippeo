@@ -102,9 +102,34 @@ class Consumption
             $total = $raw[$i]['avg'] * $dur;
             $totals += $total;
         }
+        // self::saveDailyTotal($total);
 
         return $totals;
     }
+
+    // public function saveDailyTotal($total)
+    // {
+    //     $total = self::calcTotalDay();
+
+    //     $conn = Db::getInstance();
+    //     $checkStmnt = $conn->prepare('select * from `dailytotal` where (user_id = :user_id) and (DATE(`date`) = CURDATE())');
+    //     $checkStmnt->bindParam(':user_id', $_SESSION['user']['id']);
+    //     $checkStmnt->execute();
+
+    //     $checkRes = $checkStmnt->fetchAll(PDO::FETCH_ASSOC);
+
+    //     if (!is_array($checkRes)) {
+    //         $insertStmnt = $conn->prepare('insert into `dailytotal` (`user_id`, `total`, `date) values (:user_id, :total, NOW())');
+    //         $insertStmnt->bindParam(':user_id', $_SESSION['user']['id']);
+    //         $insertStmnt->bindParam(':total', $total);
+    //         $insertStmnt->execute();
+    //     } else {
+    //         $updateStmnt = $conn->prepare('update `dailytotal` set `user_id`=:user_id, `total`=:total, `date`=NOW())');
+    //         $updateStmnt->bindParam(':user_id', $_SESSION['user']['id']);
+    //         $updateStmnt->bindParam(':total', $total);
+    //         $updateStmnt->execute();
+    //     }
+    // }
 
     public static function dailyActions($id)
     {
