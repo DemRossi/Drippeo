@@ -28,24 +28,17 @@ class Consumption
 
     public static function tips($id)
     {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare('select user_limit from product_settings where user_id = :id ');
-        $statement->bindValue(':id', $id);
-        $statement->execute();
-
-        $stm = $conn->prepare('select sum(avg) from users,productcode,comsumption where users.id = :id AND users.productcode_id = productcode.id AND comsumption.productcode=productcode.productCode');
-        $stm->bindValue(':id', $id);
-        $stm->execute();
-        $used = $stm->fetch(PDO::FETCH_COLUMN);
-
-        $limit = $statement->fetch(PDO::FETCH_COLUMN);
+        $limit = self::limit($id);
+        $used = self::calcTotalDay();
 
         if ($used > $limit / 2) {
-            $result = "Be careful you're halfway of your daily consumption";
+            $result = "Be careful you're halfway of your daily consumption.";
         } elseif ($used > $limit) {
             $result = 'Oh no! You used more than your limit.';
         } elseif ($used == $limit) {
             $result = 'Close call! Try to do better next time';
+        } elseif ($used < $limit / 2) {
+            $result = "Good job, you're still under the half of your limit.";
         } elseif (date('H') == 23) {
             if ($used >= $limit) {
                 $result = ' What a day! You used a lot of water. Why is that? Check where your water went.';
@@ -111,17 +104,6 @@ class Consumption
         }
 
         return $totals;
-    }
-
-    public static function used($id)
-    {
-        $conn = Db::getInstance();
-        $stm = $conn->prepare('select sum(avg) from users,productcode,comsumption where users.id = :id AND users.productcode_id = productcode.id AND comsumption.productcode=productcode.productCode');
-        $stm->bindValue(':id', $id);
-        $stm->execute();
-        $used = $stm->fetch(PDO::FETCH_COLUMN);
-
-        return  $used;
     }
 
     public static function dailyActions($id)

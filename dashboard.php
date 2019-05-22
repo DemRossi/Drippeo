@@ -12,13 +12,12 @@
       //no logged in user
      // header('Location: login.php');
   }
- $table = Consumption::limit($_SESSION['user']['id']);
+ $limit = Consumption::limit($_SESSION['user']['id']);
  $used = Consumption::tips($_SESSION['user']['id']);
  $totalUsed = Consumption::calcTotalDay();
  $actions = Consumption::dailyActions($_SESSION['user']['id']);
- $raw = Consumption::dataToday($_SESSION['user']['productcode']);
 
-  if ($table == 0) {
+  if ($limit == 0) {
       $noLimit = 'You need to set your limit in settings first before you can use this functionality';
   }
 
@@ -74,8 +73,11 @@
 			<?php else:  ?>
       	<h3 class="warning">Warning</h3>
       	<h4>Your limit</h4>
-      	<p>You already used <?php echo  number_format(($totalUsed / $table) * 100, 2, '.', ''); ?>  % of your own limit. </p>
+      	<p>You already used <?php echo  number_format(($totalUsed / $limit) * 100, 2, '.', ''); ?>  % of your own limit. </p>
       	<p>  <?php echo  $used; ?></p>
+				<br><br>
+				<p> Your current consumption is <?php echo round($totalUsed, 2); ?> liter.</p>
+				<p> You have <?php echo $limit - round($totalUsed, 2); ?> liter left from your personal limit.</p>
 			<?php endif; ?>
     </div>
     <div class="row">
@@ -86,7 +88,7 @@
   </div>
   <div class='item'>    
     <h3>Your limit</h3>
-    <h4><?php echo  $table; ?> L</h4>
+    <h4><?php echo  $limit; ?> L</h4>
     <div id="limit">
     
     </div>
@@ -123,8 +125,8 @@
 
         var data = google.visualization.arrayToDataTable([
           ['Water limit', 'Liters'],
-          ['Rest', 100- <?php echo  $totalUsed; ?> / <?php echo  $table; ?>*100],
-          ['Used', <?php echo  $totalUsed; ?> / <?php echo  $table; ?>*100]
+          ['Rest', 100- <?php echo  $totalUsed; ?> / <?php echo  $limit; ?>*100],
+          ['Used', <?php echo  $totalUsed; ?> / <?php echo  $limit; ?>*100]
         ]);
 
         var options = {
