@@ -163,10 +163,10 @@
                 <?php foreach ($sensorToday as $data):
                     $timestamp = strtotime($data['date']);
                     $time = date('H:i:s', $timestamp);
-                    $timeVar = explode(':', date('H:i:s', $timestamp));
-                    $avg = $data['avg'];
+                    $timeVar = explode(':', $time);
+                    $total = Consumption::calcTotalMinut($data);
                     //var_dump($time);
-                    echo "[{v: [$timeVar[0],$timeVar[1],0], f: '$time'}, $avg],";
+                    echo "[{v: [$timeVar[0],$timeVar[1],0], f: '$time'}, $total],";
                 ?>
                 <?php endforeach; ?>
 
@@ -195,7 +195,7 @@
                 format: 'h:mm a',
                 viewWindow: {
                   min: [7, 30, 0],
-                  max: [17, 30, 0],
+                  max: [22, 30, 0],
                   
                 },
               },

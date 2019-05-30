@@ -107,6 +107,16 @@ class Consumption
         return $totals;
     }
 
+    public static function calcTotalMinut($data)
+    {
+        $total = 0;
+
+        $dur = $data['duration'] / 3600;
+        $total = $data['avg'] * $dur;
+
+        return $total;
+    }
+
     // public function saveDailyTotal($total)
     // {
     //     $total = self::calcTotalDay();
