@@ -151,83 +151,44 @@
     
 </script>
 <script>
-        google.charts.load('current', {packages: ['corechart', 'bar']});
-        google.charts.setOnLoadCallback(drawDualY);
-      
-        function drawDualY() {
-            var data = new google.visualization.DataTable();
-            data.addColumn('timeofday', 'Time of Day');
-            var product = '';
-            data.addColumn('number', product);
-            data.addRows([
-                <?php foreach ($sensorToday as $data):
-                    $timestamp = strtotime($data['date']);
-                    $time = date('H:i:s', $timestamp);
-                    $timeVar = explode(':', $time);
-                    $total = Consumption::calcTotalMinut($data);
-                    //var_dump($time);
-                    echo "[{v: [$timeVar[0],$timeVar[1],0], f: '$time'}, $total],";
-                ?>
-                <?php endforeach; ?>
+    
+    
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawStuff);
 
+      function drawStuff() {
+        var data = new google.visualization.arrayToDataTable([
+            ['Time of the day', 'Total per liter'],
+        <?php foreach ($sensorToday as $data):
+            $timestamp = strtotime($data['date']);
+            $time = date('H:i:s', $timestamp);
+            $timeVar = explode(':', $time);
+            $total = Consumption::calcTotalMinut($data);
+            echo "['$time', $total],";
+            //   ['14:01:37', '0.1'],
+        ?>
+        <?php endforeach; ?>
+        
+        
+        ]);
 
-            //   [{v: [8, 0, 0], f: '8 am'}, 6],
-            //   [{v: [8, 30, 0], f: '8.30 am'}, 5],
-            //   [{v: [9, 0, 0], f: '9 am'}, 0],
-            //   [{v: [10, 0, 0], f:'10 am'}, 0],
-            //   [{v: [11, 0, 0], f: '11 am'}, 1],
-            //   [{v: [12, 0, 0], f: '12 pm'}, 2],
-            //   [{v: [13, 0, 0], f: '1 pm'}, 0],
-            //   [{v: [14, 0, 0], f: '2 pm'}, 0],
-            //   [{v: [15, 0, 0], f: '3 pm'}, 1],
-            //   [{v: [16, 0, 0], f: '4 pm'}, 0],
-            //   [{v: [17, 0, 0], f: '5 pm'}, 7],
-            ]);
-      
-            var options = {
-              series: {
-                0: {axis: 'WaterLevel'},
-              
-              },
-              legend: {position: 'none'},
-              hAxis: {
-                title: 'Time of Day',
-                format: 'h:mm a',
-                viewWindow: {
-                  min: [7, 30, 0],
-                  max: [22, 30, 0],
-                  
-                },
-              },
-              
-              colors: ['#72e0eb'],
+        var options = {
+          
+          legend: { position: 'none' },
+          axes: {
+            x: {
+              0: {  label: 'Time of the day '} // Top x-axis.
+            }
+          },
+          colors: ['#72e0eb'],
+          bar: { groupWidth: "40%" }
+        };
 
-            };
-      
-            var materialChart = new google.charts.Bar(document.getElementById('chart_div_daily'));
-            materialChart.draw(data, options);
-           // google.visualization.events.addListener(materialChart, 'select', selectHandler);
+        var chart = new google.charts.Bar(document.getElementById('chart_div_daily'));
+        // Convert the Classic options to Material options.
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      };
 
-           
-          /*  function selectHandler(e) {
-                var selection = materialChart.getSelection();
-                console.log(selection)
-                //var selection = table.setSelection(product);
-                var value = document.querySelector('.form--dashboard input').value;
-                document.querySelector('.form--btn button').addEventListener("click", function(e){
-                    product = value;
-                    console.log(change);
-                    data.setValue(selection, change)
-                    //selection.setValue(product)
-                    console.log(product);
-                    data.draw(data, options);
-                    e.preventDefault();
-                  }); 
-                  e.preventDefault();
-              
-            }*/
-         
-          }
 </script>
 
 </body>
