@@ -81,7 +81,7 @@ class Consumption
     }
 
     // get data of today
-    public function dataToday($productCode)
+    public static function dataToday($productCode)
     {
         $conn = Db::getInstance();
         $stmnt = $conn->prepare('SELECT comsumption.productcode,`avg`,`duration`, `date`,productcode_user.email FROM `comsumption`,productcode_user WHERE (DATE(`date`) = CURDATE()) && (comsumption.productcode = :productCode) && (productcode_user.productCode = comsumption.productcode)');
