@@ -425,12 +425,11 @@ width: 300px;
 footer {
   background-color: #706f6f;
   height: 100px;
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-left: 20%;
   margin-top: 60px;
 
 }
@@ -711,6 +710,13 @@ float :left;
   .contactForm input[type=submit]{
     width: 20%;
 
+  }
+  footer {
+  
+    width: 80%;
+    margin-left:20%;
+   
+  
   }
   
 }

@@ -13,9 +13,9 @@
   }
 
 $actions = Consumption::dailyActions($_SESSION['user']['id']);
-$table = Consumption::limit($_SESSION['user']['id']);
+$limit = Consumption::limit($_SESSION['user']['id']);
 $used = Consumption::tips($_SESSION['user']['id']);
-$totalUsed = Consumption::used($_SESSION['user']['id']);
+$totalUsed = Consumption::calcTotalDay();
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -46,9 +46,12 @@ $totalUsed = Consumption::used($_SESSION['user']['id']);
     
      </div>
 </div>
-  <div class="item"> </div>
-  <div class="item">
-  </div>
+<div class='item'>    
+    <h3>Your limit</h3>
+    <h4><?php echo  $limit; ?> L</h4>
+    <div id="limit">
+    
+    </div>
 </div>
 </div>
 </div>
@@ -90,5 +93,34 @@ function drawBasic() {
       chart.draw(data, options);
     }*/
   </script>
+  <script>
+  // YOU LIMIET EN U VERBRUIK
+  google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Water limit', 'Liters'],
+          ['Rest', 100- <?php echo  $totalUsed; ?> / <?php echo  $limit; ?>*100],
+          ['Used', <?php echo  $totalUsed; ?> / <?php echo  $limit; ?>*100]
+        ]);
+
+        var options = {
+          pieSliceTextStyle: {
+            color: '#706f6f',
+          },
+		      pieHole: 0.35,
+		      pieSliceBorderColor: "none",
+          colors: ['#72e0eb','#f4f4f4' ],
+		      legend: {
+			    position: "none"	
+          },
+	};
+        var chart = new google.visualization.PieChart(document.getElementById('limit'));
+        chart.draw(data, options);
+      }
+
+</script>
 </body>
 </html>
