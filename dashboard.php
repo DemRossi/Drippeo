@@ -146,34 +146,26 @@
         chart.draw(data, options);
       }
 
-
- 
-    
 </script>
 <script>
-    
-    
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawStuff);
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawStuff);
 
-      function drawStuff() {
+    function drawStuff() {
         var data = new google.visualization.arrayToDataTable([
             ['Time of the day', 'Total per liter'],
-        <?php foreach ($sensorToday as $data):
-            $timestamp = strtotime($data['date']);
-            $time = date('H:i:s', $timestamp);
-            $timeVar = explode(':', $time);
-            $total = Consumption::calcTotalMinut($data);
-            echo "['$time', $total],";
-            //   ['14:01:37', '0.1'],
-        ?>
-        <?php endforeach; ?>
-        
-        
+            <?php foreach ($sensorToday as $data):
+                $timestamp = strtotime($data['date']);
+                $time = date('H:i:s', $timestamp);
+                $timeVar = explode(':', $time);
+                $total = Consumption::calcTotalMinut($data);
+                echo "['$time', $total],";
+                //   ['14:01:37', '0.1'],
+            ?>
+            <?php endforeach; ?>
         ]);
 
         var options = {
-          
           legend: { position: 'none' },
           axes: {
             x: {
