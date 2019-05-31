@@ -148,39 +148,49 @@
 
 </script>
 <script>
-    google.charts.load('current', {'packages':['bar']});
-    google.charts.setOnLoadCallback(drawStuff);
+	<?php if ($sensorToday): ?>
 
-    function drawStuff() {
-        var data = new google.visualization.arrayToDataTable([
-            ['Time of the day', 'Total per liter'],
-            <?php foreach ($sensorToday as $data):
-                $timestamp = strtotime($data['date']);
-                $time = date('H:i:s', $timestamp);
-                $timeVar = explode(':', $time);
-                $total = Consumption::calcTotalMinut($data);
-                echo "['$time', $total],";
-                //   ['14:01:37', '0.1'],
-            ?>
-            <?php endforeach; ?>
-        ]);
+		google.charts.load('current', {'packages':['bar']});
+		google.charts.setOnLoadCallback(drawStuff);
 
-        var options = {
-          legend: { position: 'none' },
-          axes: {
-            x: {
-              0: {  label: 'Time of the day '} // Top x-axis.
-            }
-          },
-          colors: ['#72e0eb'],
-          bar: { groupWidth: "40%" }
-        };
+		function drawStuff() {
+			var data = new google.visualization.arrayToDataTable([
+				
+				['Time of the day', 'Total per liter'],
+				<?php foreach ($sensorToday as $data):
+                    $timestamp = strtotime($data['date']);
+                    $time = date('H:i:s', $timestamp);
+                    $total = Consumption::calcTotalMinut($data);
+                    echo "['$time', $total],";
+                    //   ['14:01:37', '0.1'],
+                ?>
+				<?php endforeach; ?>
+			]);
 
-        var chart = new google.charts.Bar(document.getElementById('chart_div_daily'));
-        // Convert the Classic options to Material options.
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      };
+			var options = {
+			legend: { position: 'none' },
+			axes: {
+				x: {
+				0: {  label: 'Time of the day '} // Top x-axis.
+				}
+			},
+			colors: ['#72e0eb'],
+			bar: { groupWidth: "40%" }
+			};
 
+			var chart = new google.charts.Bar(document.getElementById('chart_div_daily'));
+			// Convert the Classic options to Material options.
+			chart.draw(data, google.charts.Bar.convertOptions(options));
+		};
+	<?php else: ?>
+		let chartContainer = document.getElementById('chart_div_daily');
+		let title = document.createElement("h4");
+		title.innerHTML = "Congratulations, today you haven't used any water yet!";
+		chartContainer.appendChild(title);
+		// chartContainer.addEventListener("click", ()=>{
+		// 	alert("yo!");
+		// })
+	<?php endif; ?>
 </script>
 
 </body>
