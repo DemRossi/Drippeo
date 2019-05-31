@@ -54,7 +54,6 @@
     <div class='item noBorder'>
         <h3>Some interesting links</h3>
         <ul class="list">
-            <li><a href="https://www.dewatergroep.be/nl-be/drinkwater/veelgestelde-vragen/waterverbruik">De watergroep</a></li>
             <li><a href="https://www.sdgs.be/nl/sdgs">SDGs</a></li>
             <li><a href="https://www.epa.gov/watersense/how-we-use-water">Epa</a></li>
 </ul>
