@@ -42,7 +42,7 @@
   <h2>Welcome on your personal dashboard </h2>
 </div>
   <div class='column'>
-    <div class='item'>
+    <div class='item feedback'>
         <h3>Today's water</h3>
         <div id="chart_div_daily"></div>
 
@@ -148,6 +148,33 @@
 
 </script>
 <script>
+	window.onload = ()=>{
+		//alert("yo");
+		var field = 'time';
+		var url = window.location.href;
+		//console.log(url);
+		if(url.indexOf('?' + field + '=') != -1){
+			
+			return true;
+		}
+		else if(url.indexOf('&' + field + '=') != -1){
+
+			let params = (new URL(document.location)).searchParams;
+			let time = params.get('time');
+			let feedback = `Your selected time is: ${time}`;
+
+			if (time){
+				let selected = document.createElement("p");
+				selected.innerHTML = feedback;
+				let chartCon = document.querySelector('.feedback');
+				console.log(chartCon);
+				chartCon.appendChild(selected);
+
+			}
+			return true;
+		}
+		return false
+	}
 	<?php if ($sensorToday): ?>
 
 		google.charts.load('current', {'packages':['bar']});
@@ -179,6 +206,16 @@
 			};
 
 			var chart = new google.charts.Bar(document.getElementById('chart_div_daily'));
+
+			function selectHandler() {
+          		let selectedItem = chart.getSelection()[0];
+        		if (selectedItem) {
+            		let time = data.getValue(selectedItem.row, 0);
+					insertParam("time", time);
+          		}
+        	}
+
+			google.visualization.events.addListener(chart, 'select', selectHandler); 
 			// Convert the Classic options to Material options.
 			chart.draw(data, google.charts.Bar.convertOptions(options));
 		};
@@ -187,10 +224,31 @@
 		let title = document.createElement("h4");
 		title.innerHTML = "Congratulations, today you haven't used any water yet!";
 		chartContainer.appendChild(title);
-		// chartContainer.addEventListener("click", ()=>{
-		// 	alert("yo!");
-		// })
 	<?php endif; ?>
+	
+	function insertParam(key, value)
+{
+    key = encodeURI(key); value = encodeURI(value);
+
+    var kvp = document.location.search.substr(1).split('&');
+
+    var i=kvp.length; var x; while(i--) 
+    {
+        x = kvp[i].split('=');
+
+        if (x[0]==key)
+        {
+            x[1] = value;
+            kvp[i] = x.join('=');
+            break;
+        }
+    }
+
+    if(i<0) {kvp[kvp.length] = [key,value].join('=');}
+
+    //this will reload the page, it's likely better to store this until finished
+    document.location.search = kvp.join('&'); 
+}
 </script>
 
 </body>
