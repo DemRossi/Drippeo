@@ -495,7 +495,11 @@ padding: 20px 0 0 20px;
 .bold{
   font-weight: 700;
 }
-
+.userList{
+  width: 500px;
+  padding-top: 20px;
+  padding-left: 75px;
+}
 /* ------- CHARTS ------- */
 
 
