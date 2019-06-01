@@ -12,10 +12,7 @@
             $a->setTotal($total);
             $a->setTimestamp($timestamp);
             $a->saveAction();
-            // $a->setFollowsId($followsId);
-            // $a->setFollowerId($followerId);
-            // $a->setType($type);
-            // $a->saveFollower();
+
             $result = [
                 'status' => 'success',
                 'message' => 'Action was saved',

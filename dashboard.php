@@ -51,21 +51,12 @@
     <div class='item element_question'>
       <h3>What did you do?</h3>
     <form class="form--dashboard" method="post" action="">
+
         <?php foreach ($actionList as $al):
             echo "<label><input type='checkbox' class='action' data-id='".$al['id']."' data-check='0' id=".$al['name'].' name='.$al['name'].' value='.$al['name'].'>'.$al['name'].'</label>';
             ?>
         <?php endforeach; ?>
-      <!-- <label><input type="checkbox" class="action" data-id="1" data-check="0" id="shower" name="Shower" value="Shower">Shower</label>
-      <label><input type="checkbox" class="action" data-id="2" data-check="0" name="Bath" value="Bath">Bath </label>
-      <label><input type="checkbox" class="action" data-id="3" data-check="0" name="Toilet" value="Toilet">Toilet</label>
-      <label><input type="checkbox" class="action" data-id="4" data-check="0" name="Sink" value="Sink">Sink </label>
-      <label><input type="checkbox" class="action" data-id="5" data-check="0" name="WashingMachine" value="Washing Machine">Washing Machine</label>
-      <label><input type="checkbox" class="action" data-id="6" data-check="0" name="Dishwasher" value="Dishwasher">Dishwasher </label>
-      <label><input type="checkbox" class="action" data-id="7" data-check="0" name="OutdoorTap" value="Outdoor tap">Outdoor tap</label> -->
 
-      <!-- <div class="form--btn">
-         <button class="subBtn" type="submit" name="subBtn">Submit!</button>
-      </div> -->
     </form>
     </div>
   
@@ -107,8 +98,9 @@
     <h3>What did you do today</h3>
     <ul class="userList">
         <?php foreach ($actions as $a):?>
+            <!--mogelijk nog icon invoegen-->
             <li><?php echo 'You used '.round($a['total'], 2).' L water for the '.$a['name']; ?></li>
-          <!-- <img src="<?php //echo $a['icon'];?>" class="icon"><p><?php //echo $a['name'];?></p> -->
+         
         <?php endforeach; ?>
       </ul>
     </div>
@@ -156,10 +148,10 @@
 </script>
 <script>
 	window.onload = ()=>{
-		//alert("yo");
+        // check on load if parameter is set
 		var field = 'toTime';
 		var url = window.location.href;
-		//console.log(url);
+
 		if(url.indexOf('?' + field + '=') != -1){
 			
 			return true;
@@ -292,19 +284,18 @@
                 })
                 .done( function ( res ){
                     if (res.status == "success"){
-                        console.log("😁");
+                        // create new listitem
                         let actionItem = document.createElement('li');
+
                         let total = res.data.total;
-                        console.log(total);
                         total = parseFloat(total).toFixed(2);
 
                         let actionId = res.data.action;
                         let actionName = $('.form--dashboard').find(`[data-id='${actionId}']`);
                         actionName = actionName.val();
-                        console.log(actionName);
-
+                        // fill with data
                         actionItem.innerHTML = `You used ${total} L water for the ${actionName}`;
-                        
+                        // append to .userList
                         $('.userList').append(actionItem);
                     }
                 });
@@ -315,7 +306,6 @@
 
 				chartCon.appendChild(selected);
             }
-            // console.log(searchTime.has('time'));
         }
     });
 </script>
