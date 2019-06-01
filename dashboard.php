@@ -99,7 +99,11 @@
     <ul class="userList">
         <?php foreach ($actions as $a):?>
             <!--mogelijk nog icon invoegen-->
-            <li><?php echo 'You used '.round($a['total'], 2).' L water for the '.$a['name']; ?></li>
+            <?php
+                $timestamp = $a['date'];
+                $dateTime = explode(' ', $timestamp);
+            ?>
+            <li><?php echo '['.$dateTime[1].'] - You used '.round($a['total'], 2).' L water for the '.$a['name']; ?></li>
          
         <?php endforeach; ?>
       </ul>
@@ -167,7 +171,6 @@
 				let selected = document.createElement("p");
 				selected.innerHTML = feedback;
 				let chartCon = document.querySelector('.feedback');
-				//console.log(chartCon);
 				chartCon.appendChild(selected);
 
 			}
@@ -213,7 +216,6 @@
             		let time = data.getValue(selectedItem.row, 0);
                     let total = data.getValue(selectedItem.row, 1);
 					insertParam("toTime", `${time}_${total}`);
-                    //console.log(total);
           		}
         	}
 
@@ -263,7 +265,6 @@
             if(searchTime.has('toTime')){
                 // get necessities
                 let toTime = searchTime.get('toTime');
-                console.log(toTime);
                 let selected = toTime.split("_");
 			    let time = selected[0];
                 let total = selected[1];
@@ -293,8 +294,9 @@
                         let actionId = res.data.action;
                         let actionName = $('.form--dashboard').find(`[data-id='${actionId}']`);
                         actionName = actionName.val();
+
                         // fill with data
-                        actionItem.innerHTML = `You used ${total} L water for the ${actionName}`;
+                        actionItem.innerHTML = `[${time}] - You used ${total} L water for the ${actionName}`;
                         // append to .userList
                         $('.userList').append(actionItem);
                     }

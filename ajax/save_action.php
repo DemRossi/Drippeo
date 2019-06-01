@@ -19,6 +19,7 @@
                 'data' => [
                     'action' => $actionId,
                     'total' => $total,
+                    'time' => $timestamp,
                 ],
             ];
         } catch (Throwable $t) {
