@@ -17,6 +17,7 @@
  $totalUsed = Consumption::calcTotalDay();
  $sensorToday = Consumption::dataToday($_SESSION['user']['productcode']);
  $actions = Consumption::dailyActions($_SESSION['user']['id']);
+ $actionList = Action::getActionList();
 
   if ($limit == 0) {
       $noLimit = 'You need to set your limit in settings first before you can use this functionality';
@@ -50,14 +51,17 @@
     <div class='item element_question'>
       <h3>What did you do?</h3>
     <form class="form--dashboard" method="post" action="">
-
-      <label><input type="checkbox" class="action" data-id="1" data-check="0" id="shower" name="Shower" value="Shower">Shower</label>
+        <?php foreach ($actionList as $al):
+            echo "<label><input type='checkbox' class='action' data-id='".$al['id']."' data-check='0' id=".$al['name'].' name='.$al['name'].' value='.$al['name'].'>'.$al['name'].'</label>';
+            ?>
+        <?php endforeach; ?>
+      <!-- <label><input type="checkbox" class="action" data-id="1" data-check="0" id="shower" name="Shower" value="Shower">Shower</label>
       <label><input type="checkbox" class="action" data-id="2" data-check="0" name="Bath" value="Bath">Bath </label>
       <label><input type="checkbox" class="action" data-id="3" data-check="0" name="Toilet" value="Toilet">Toilet</label>
       <label><input type="checkbox" class="action" data-id="4" data-check="0" name="Sink" value="Sink">Sink </label>
       <label><input type="checkbox" class="action" data-id="5" data-check="0" name="WashingMachine" value="Washing Machine">Washing Machine</label>
       <label><input type="checkbox" class="action" data-id="6" data-check="0" name="Dishwasher" value="Dishwasher">Dishwasher </label>
-      <label><input type="checkbox" class="action" data-id="7" data-check="0" name="OutdoorTap" value="Outdoor tap">Outdoor tap</label>
+      <label><input type="checkbox" class="action" data-id="7" data-check="0" name="OutdoorTap" value="Outdoor tap">Outdoor tap</label> -->
 
       <!-- <div class="form--btn">
          <button class="subBtn" type="submit" name="subBtn">Submit!</button>
@@ -152,7 +156,7 @@
 <script>
 	window.onload = ()=>{
 		//alert("yo");
-		var field = 'time';
+		var field = 'toTime';
 		var url = window.location.href;
 		//console.log(url);
 		if(url.indexOf('?' + field + '=') != -1){
@@ -162,10 +166,11 @@
 		else if(url.indexOf('&' + field + '=') != -1){
 
 			let params = (new URL(document.location)).searchParams;
-			let time = params.get('time');
-			let feedback = `Your selected time is: ${time}`;
+			let toTime = params.get('toTime');
+            let selected = toTime.split("_");
+			let feedback = `Your selected time is: ${selected[0]}`;
 
-			if (time){
+			if (toTime){
 				let selected = document.createElement("p");
 				selected.innerHTML = feedback;
 				let chartCon = document.querySelector('.feedback');
@@ -213,7 +218,9 @@
           		let selectedItem = chart.getSelection()[0];
         		if (selectedItem) {
             		let time = data.getValue(selectedItem.row, 0);
-					insertParam("time", time);
+                    let total = data.getValue(selectedItem.row, 1);
+					insertParam("toTime", `${time}_${total}`);
+                    //console.log(total);
           		}
         	}
 
@@ -260,9 +267,13 @@
             let action = e.target.getAttribute("data-check");
             let searchTime = new URLSearchParams(window.location.search);
             // if parameter time is set
-            if(searchTime.has('time')){
+            if(searchTime.has('toTime')){
                 // get necessities
-                let time = searchTime.get('time');
+                let toTime = searchTime.get('toTime');
+                console.log(toTime);
+                let selected = toTime.split("_");
+			    let time = selected[0];
+                let total = selected[1];
                 let timestamp = "<?php echo date('Y-m-d'); ?> "+ time;
                 let actionId = e.target.getAttribute("data-id");
                 
@@ -272,7 +283,8 @@
                     url: "ajax/save_action.php",
                     data: {
                         actionId: actionId,
-                        timestamp: timestamp
+                        timestamp: timestamp,
+                        total: total
                     },
                     dataType: 'json'
                     

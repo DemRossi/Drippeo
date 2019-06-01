@@ -3,11 +3,13 @@
     if (!empty($_POST)) {
         $actionId = $_POST['actionId'];
         $userId = $_SESSION['user']['id'];
+        $total = $_POST['total'];
         $timestamp = $_POST['timestamp'];
         try {
             $a = new Action();
             $a->setActionId($actionId);
             $a->setUserId($userId);
+            $a->setTotal($total);
             $a->setTimestamp($timestamp);
             $a->saveAction();
             // $a->setFollowsId($followsId);
@@ -18,7 +20,7 @@
                 'status' => 'success',
                 'message' => 'Action was saved',
                 'data' => [
-                    'action' => $$actionId,
+                    'action' => $actionId,
                 ],
             ];
         } catch (Throwable $t) {
