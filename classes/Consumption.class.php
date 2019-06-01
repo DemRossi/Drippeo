@@ -169,4 +169,30 @@ class Consumption
 
         return 'help';
     }
+
+    public static function calcTotalYear()
+    {
+        $conn = Db::getInstance();
+        $year = date('Y');
+
+        $stmnt = $conn->prepare('SELECT comsumption.productcode,`avg`,`duration`, 
+        `date`,productcode_user.email FROM `comsumption`,productcode_user 
+        WHERE (YEAR(`date`) = :year) && (comsumption.productcode = :productCode) && (productcode_user.productCode = comsumption.productcode)');
+        $stmnt->bindParam(':productCode', $_SESSION['user']['productcode']);
+        $stmnt->bindParam(':year', $year);
+        $stmnt->execute();
+
+        $resultArray = $stmnt->fetchAll(PDO::FETCH_ASSOC);
+
+        $totalYear = 0;
+        for ($i = 0; $i < count($resultArray); ++$i) {
+            $dur = $resultArray[$i]['duration'] / 3600;
+            $total = $resultArray[$i]['avg'] * $dur;
+            $totalYear += $total;
+        }
+
+        // self::saveDailyTotal($total);
+
+        return $totalYear;
+    }
 }

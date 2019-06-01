@@ -497,9 +497,7 @@ padding: 20px 0 0 20px;
 }
 
 /* ------- CHARTS ------- */
-#vergelijking{
-  padding: 10px;
-}
+
 
 #chart_div_daily{
   padding: 30px;
@@ -512,6 +510,10 @@ padding: 20px 0 0 20px;
  margin: 0 auto;
 }
 
+#barchart_material{
+  padding: 30px;
+  height: 100px;
+}
 .warning{
   color:#F42B03;
 }

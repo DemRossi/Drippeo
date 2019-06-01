@@ -16,12 +16,16 @@ $actions = Consumption::dailyActions($_SESSION['user']['id']);
 $limit = Consumption::limit($_SESSION['user']['id']);
 $used = Consumption::tips($_SESSION['user']['id']);
 $totalUsed = Consumption::calcTotalDay();
+$yearTotal = Consumption::calcTotalYear();
+$year = date('Y');
+
+var_dump($yearTotal);
 
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once 'includes/head.inc.php'; ?>
-    <title>Comsumption</title>
+  <?php include_once 'includes/head.inc.php'; ?>
+  <title>Consumption</title>
 </head>
 <body>
 <?php include_once 'includes/nav.inc.php'; ?>
@@ -54,45 +58,30 @@ $totalUsed = Consumption::calcTotalDay();
     </div>
 </div>
 </div>
+
+<div class='column'>
+<div class='item'>    
+    <h3>Your yearly consumption</h3>
+    <h4>This year: <?php echo  date('Y'); ?></h4>
+<div id="barchart_material"> 
 </div>
 
+</div>
+
+    <div class='item'></div>
+  </div>
+</div>
+
+
+
+
 <?php include_once 'includes/footer.inc.php'; ?>
+
 <script src="js/webNavigation.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="js/charts.js"></script>
 
-<script>
-  /*
-   // VERGELIJKING
-google.charts.load('current', {packages: ['corechart', 'bar']});
-google.charts.setOnLoadCallback(drawBasic);
 
-function drawBasic() {
-
-      var data = google.visualization.arrayToDataTable([
-        ['City', '2010 Population',{ role: "style" }],
-        ['Your water', 1000,"#72e0eb"],
-        ['Similar family', 700,"#f4f4f4"],
-        ['Average', 850,"#f4f4f4"]
-      ]);
-
-      var options = {
-        title: 'Monthly comparison',
-        width: 400,
-        position:"absolute",
-        chartArea: {width: 300},
-        hAxis: {
-          title: 'Total water use',
-          minValue: 0
-        },
-     legend: { position: "none" },
-      };
-
-      var chart = new google.visualization.BarChart(document.getElementById('vergelijking'));
-
-      chart.draw(data, options);
-    }*/
-  </script>
   <script>
   // YOU LIMIET EN U VERBRUIK
   google.charts.load('current', {'packages':['corechart']});
@@ -122,5 +111,35 @@ function drawBasic() {
       }
 
 </script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Water','Year limit'],
+          [' <?php echo  $year; ?>' , <?php echo  $yearTotal; ?>,<?php echo  $limit; ?>*365 ],
+          
+          
+        ]);
+
+        var options = {
+          
+          bars: 'horizontal', 
+          hAxis: {format: 'decimal'},
+          height: 100,
+          width:400,
+          colors: ['#f4f4f4','#72e0eb'],
+          legend: {
+			    position: "none"	
+          },
+
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
 </body>
 </html>
