@@ -50,17 +50,18 @@
     <div class='item element_question'>
       <h3>What did you do?</h3>
     <form class="form--dashboard" method="post" action="">
-      <input type="radio" name="element"  checked value="Shower">Shower<br>
-      <input type="radio" name="element"  checked value="Bath">Bath <br>
-      <input type="radio" name="element"  checked value="Toilet">Toilet<br>
-      <input type="radio" name="element"  checked value="Sink">Sink <br>
-      <input type="radio" name="element"  checked value="Washing Machine">Washing Machine<br>
-      <input type="radio" name="element"  checked value="Dishwasher">Dishwasher <br>
-      <input type="radio" name="element"  checked value="Outdoor tap">Outdoor tap<br>
 
-      <div class="form--btn">
-         <button type="submit" name="submitBtn">Submit!</button>
-      </div>
+      <label><input type="checkbox" class="action" data-id="1" data-check="0" id="shower" name="Shower" value="Shower">Shower</label>
+      <label><input type="checkbox" class="action" data-id="2" data-check="0" name="Bath" value="Bath">Bath </label>
+      <label><input type="checkbox" class="action" data-id="3" data-check="0" name="Toilet" value="Toilet">Toilet</label>
+      <label><input type="checkbox" class="action" data-id="4" data-check="0" name="Sink" value="Sink">Sink </label>
+      <label><input type="checkbox" class="action" data-id="5" data-check="0" name="WashingMachine" value="Washing Machine">Washing Machine</label>
+      <label><input type="checkbox" class="action" data-id="6" data-check="0" name="Dishwasher" value="Dishwasher">Dishwasher </label>
+      <label><input type="checkbox" class="action" data-id="7" data-check="0" name="OutdoorTap" value="Outdoor tap">Outdoor tap</label>
+
+      <!-- <div class="form--btn">
+         <button class="subBtn" type="submit" name="subBtn">Submit!</button>
+      </div> -->
     </form>
     </div>
   
@@ -116,6 +117,7 @@
 
 <script src="js/webNavigation.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="js/charts.js"></script>
 
 <script>
@@ -167,7 +169,7 @@
 				let selected = document.createElement("p");
 				selected.innerHTML = feedback;
 				let chartCon = document.querySelector('.feedback');
-				console.log(chartCon);
+				//console.log(chartCon);
 				chartCon.appendChild(selected);
 
 			}
@@ -250,6 +252,46 @@
     document.location.search = kvp.join('&'); 
 }
 </script>
+<script>
+    // if there is a change in the div
+    $('.form--dashboard').change((e)=>{
+        // if the target has class action
+        if(e.target.classList.contains("action")){
+            let action = e.target.getAttribute("data-check");
+            let searchTime = new URLSearchParams(window.location.search);
+            // if parameter time is set
+            if(searchTime.has('time')){
+                // get necessities
+                let time = searchTime.get('time');
+                let timestamp = "<?php echo date('Y-m-d'); ?> "+ time;
+                let actionId = e.target.getAttribute("data-id");
+                
+                // start ajax-call
+                $.ajax({
+                    method: "POST",
+                    url: "ajax/save_action.php",
+                    data: {
+                        actionId: actionId,
+                        timestamp: timestamp
+                    },
+                    dataType: 'json'
+                    
+                })
+                .done( function ( res ){
+                    if (res.status == "success"){
+                        console.log("😁");
+                    }
+                });
+            }else{
+				let selected = document.createElement("p");
+				selected.innerHTML = "You need to select a event here first.";
+				let chartCon = document.querySelector('.feedback');
 
+				chartCon.appendChild(selected);
+            }
+            // console.log(searchTime.has('time'));
+        }
+    });
+</script>
 </body>
 </html>
