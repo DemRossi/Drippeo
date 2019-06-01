@@ -19,8 +19,6 @@ $totalUsed = Consumption::calcTotalDay();
 $yearTotal = Consumption::calcTotalYear();
 $year = date('Y');
 
-var_dump($yearTotal);
-
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,11 +30,25 @@ var_dump($yearTotal);
 
 <div class="container_tips">
 <div class="column column--title">
-<h2>Details</h2>
+  <h2>Details</h2>
 </div>
 <div class="column">
-<div class='item--2'>
-  <div class="row">
+
+<div class='item'>    
+    <h3>Your limit</h3>
+    <h4><?php echo  $limit; ?> L</h4>
+    <div id="limit"></div>
+</div>
+<div class='item'>    
+<h3>Comparison</h3>
+  <h4>Daily</h4>
+  <div id="comparison_chart"></div>
+
+</div>
+</div>
+
+  <div class='column'>
+  <div class="item">
     <h3>What did you do today</h3>
     <ul>
         <?php foreach ($actions as $a):?>
@@ -45,31 +57,14 @@ var_dump($yearTotal);
       </ul>
 
      </div>
-  <div class="row">
-
-    
-     </div>
-</div>
-<div class='item'>    
-    <h3>Your limit</h3>
-    <h4><?php echo  $limit; ?> L</h4>
-    <div id="limit">
-    
-    </div>
-</div>
-</div>
-
-<div class='column'>
-<div class='item'>    
-    <h3>Your yearly consumption</h3>
+  <div class="item">
+  
+  <h3>Your yearly consumption</h3>
     <h4>This year: <?php echo  date('Y'); ?></h4>
 <div id="barchart_material"> 
 </div>
-
+     </div>
 </div>
-
-    <div class='item'></div>
-  </div>
 </div>
 
 
@@ -118,9 +113,7 @@ var_dump($yearTotal);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Year', 'Water','Year limit'],
-          [' <?php echo  $year; ?>' , <?php echo  $yearTotal; ?>,<?php echo  $limit; ?>*365 ],
-          
-          
+          [' <?php echo  $year; ?>' , <?php echo  $yearTotal; ?>,<?php echo  $limit; ?>*365 ], 
         ]);
 
         var options = {
@@ -141,5 +134,30 @@ var_dump($yearTotal);
         chart.draw(data, google.charts.Bar.convertOptions(options));
       }
     </script>
+    <script>
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Person', 'Limit', 'Spends'],
+          ['Least spender', 130, 100],
+          ['You',  <?php echo  $limit; ?>,  <?php echo  $totalUsed; ?> ],
+          ['Biggest spender', 200, 190],
+
+        ]);
+
+        var options = {
+          bars: 'vertical',
+          vAxis: {format: 'decimal'},
+          height: 300,
+          colors: ['#f4f4f4','#72e0eb'],
+     
+        };
+        var chart = new google.charts.Bar(document.getElementById('comparison_chart'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+       
+      </script>
 </body>
 </html>

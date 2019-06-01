@@ -513,6 +513,13 @@ padding: 20px 0 0 20px;
 #barchart_material{
   padding: 30px;
   height: 100px;
+  width:400px;
+  margin:0;
+}
+#comparison_chart{
+  padding: 30px;
+  height: 100px;
+  width:400px;
 }
 .warning{
   color:#F42B03;

@@ -54,8 +54,8 @@
     <div class='item noBorder'>
         <h3>Some interesting links</h3>
         <ul class="list">
-            <li><a href="https://www.sdgs.be/nl/sdgs">SDGs</a></li>
-            <li><a href="https://www.epa.gov/watersense/how-we-use-water">Epa</a></li>
+            <li><a href="https://www.sdgs.be/nl/sdgs" target="_blank">SDGs</a></li>
+            <li><a href="https://www.epa.gov/watersense/how-we-use-water" target="_blank">Epa</a></li>
 </ul>
         </div>
     </div>

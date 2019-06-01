@@ -154,22 +154,6 @@ class Consumption
         return  $actions;
     }
 
-    public static function vergelijking($id)
-    {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare('select product_settings.residents from product_settings where product_settings.user_id = :id');
-        $statement->bindValue(':id', $id);
-        $aantal = $statement->fetch(PDO::FETCH_COLUMN);
-
-        $stm = $conn->prepare('select comsumption.avg from comsumption,product_settings where product_settings.residents = :aantal');
-        $stm->bindValue(':id', $id);
-        $stm->bindValue(':aantal', $aantal);
-        $stm->execute();
-        $andere = $stm->fetchAll(PDO::FETCH_ASSOC);
-
-        return 'help';
-    }
-
     public static function calcTotalYear()
     {
         $conn = Db::getInstance();
@@ -194,5 +178,21 @@ class Consumption
         // self::saveDailyTotal($total);
 
         return $totalYear;
+    }
+
+    public static function comparison($id)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare('select product_settings.residents from product_settings where product_settings.user_id = :id');
+        $statement->bindValue(':id', $id);
+        $aantal = $statement->fetch(PDO::FETCH_COLUMN);
+
+        $stm = $conn->prepare('select comsumption.avg from comsumption,product_settings where product_settings.residents = :aantal');
+        $stm->bindValue(':id', $id);
+        $stm->bindValue(':aantal', $aantal);
+        $stm->execute();
+        $andere = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        return 'help';
     }
 }
