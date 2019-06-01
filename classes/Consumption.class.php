@@ -167,7 +167,7 @@ class Consumption
         $stmnt->execute();
 
         $resultArray = $stmnt->fetchAll(PDO::FETCH_ASSOC);
-
+        // HET TOTAAL VAN HET JAAR BEREKEKEN :) NO CLUE HOE HET MOET
         $totalYear = 0;
         for ($i = 0; $i < count($resultArray); ++$i) {
             $dur = $resultArray[$i]['duration'] / 3600;
@@ -180,19 +180,8 @@ class Consumption
         return $totalYear;
     }
 
-    public static function comparison($id)
-    {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare('select product_settings.residents from product_settings where product_settings.user_id = :id');
-        $statement->bindValue(':id', $id);
-        $aantal = $statement->fetch(PDO::FETCH_COLUMN);
-
-        $stm = $conn->prepare('select comsumption.avg from comsumption,product_settings where product_settings.residents = :aantal');
-        $stm->bindValue(':id', $id);
-        $stm->bindValue(':aantal', $aantal);
-        $stm->execute();
-        $andere = $stm->fetchAll(PDO::FETCH_ASSOC);
-
-        return 'help';
-    }
+    // VERGELIJKING MET ANDEREN
+        // 1. De grootste verbruiker(zelfde aantal huishouden)
+        // 2. Minste verbruiker (zelfde aantal huishouden)
+        // 3. gemiddelde van dagelijks verbruik van jezelf
 }

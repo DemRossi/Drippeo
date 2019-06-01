@@ -42,6 +42,7 @@ $year = date('Y');
 <div class='item'>    
 <h3>Comparison</h3>
   <h4>Daily</h4>
+  <h5><span class="legend-limit">Limit</span>  <br> <span class="legend-use">Average use</span></h5>
   <div id="comparison_chart"></div>
 
 </div>
@@ -135,24 +136,26 @@ $year = date('Y');
       }
     </script>
     <script>
-      google.charts.load('current', {'packages':['bar']});
+        google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Person', 'Limit', 'Spends'],
-          ['Least spender', 130, 100],
-          ['You',  <?php echo  $limit; ?>,  <?php echo  $totalUsed; ?> ],
-          ['Biggest spender', 200, 190],
-
+          ['Least spender', 100, 90],
+          ['You', <?php echo  $limit; ?>, 190],
+          ['Biggest spender', 200, 210]
         ]);
 
         var options = {
-          bars: 'vertical',
-          vAxis: {format: 'decimal'},
-          height: 300,
+          
+          bars: 'horizontal', // Required for Material Bar Charts.
+          hAxis: {format: 'decimal'},
+          height: 200,
           colors: ['#f4f4f4','#72e0eb'],
-     
+          legend: {
+			    position: "none"	
+          },
         };
         var chart = new google.charts.Bar(document.getElementById('comparison_chart'));
         chart.draw(data, google.charts.Bar.convertOptions(options));
