@@ -154,19 +154,34 @@ class Consumption
         return  $actions;
     }
 
-    public static function vergelijking($id)
+    public static function calcTotalYear()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare('select product_settings.residents from product_settings where product_settings.user_id = :id');
-        $statement->bindValue(':id', $id);
-        $aantal = $statement->fetch(PDO::FETCH_COLUMN);
+        $year = date('Y');
 
-        $stm = $conn->prepare('select comsumption.avg from comsumption,product_settings where product_settings.residents = :aantal');
-        $stm->bindValue(':id', $id);
-        $stm->bindValue(':aantal', $aantal);
-        $stm->execute();
-        $andere = $stm->fetchAll(PDO::FETCH_ASSOC);
+        $stmnt = $conn->prepare('SELECT comsumption.productcode,`avg`,`duration`, 
+        `date`,productcode_user.email FROM `comsumption`,productcode_user 
+        WHERE (YEAR(`date`) = :year) && (comsumption.productcode = :productCode) && (productcode_user.productCode = comsumption.productcode)');
+        $stmnt->bindParam(':productCode', $_SESSION['user']['productcode']);
+        $stmnt->bindParam(':year', $year);
+        $stmnt->execute();
 
-        return 'help';
+        $resultArray = $stmnt->fetchAll(PDO::FETCH_ASSOC);
+        // HET TOTAAL VAN HET JAAR BEREKEKEN :) NO CLUE HOE HET MOET
+        $totalYear = 0;
+        for ($i = 0; $i < count($resultArray); ++$i) {
+            $dur = $resultArray[$i]['duration'] / 3600;
+            $total = $resultArray[$i]['avg'] * $dur;
+            $totalYear += $total;
+        }
+
+        // self::saveDailyTotal($total);
+
+        return $totalYear;
     }
+
+    // VERGELIJKING MET ANDEREN
+        // 1. De grootste verbruiker(zelfde aantal huishouden)
+        // 2. Minste verbruiker (zelfde aantal huishouden)
+        // 3. gemiddelde van dagelijks verbruik van jezelf
 }

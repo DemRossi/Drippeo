@@ -497,9 +497,7 @@ padding: 20px 0 0 20px;
 }
 
 /* ------- CHARTS ------- */
-#vergelijking{
-  padding: 10px;
-}
+
 
 #chart_div_daily{
   padding: 30px;
@@ -512,8 +510,28 @@ padding: 20px 0 0 20px;
  margin: 0 auto;
 }
 
+#barchart_material{
+  padding: 30px;
+  height: 100px;
+  width:400px;
+  margin:0;
+}
+#comparison_chart{
+  padding: 30px;
+  height: 100px;
+  width:400px;
+}
 .warning{
   color:#F42B03;
+}
+
+h5{
+  padding: 10px 0 10px 50px;
+}
+.legend-limit{
+color:#f4f4f4;}
+.legend-use{
+color:#72e0eb;
 }
 /* ------- Tips & Tricks ------- */
 

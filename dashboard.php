@@ -82,7 +82,7 @@
       	<h4>Your limit</h4>
       	<p>You already used <?php echo  number_format(($totalUsed / $limit) * 100, 2, '.', ''); ?>  % of your own limit. </p>
       	<p>  <?php echo  $used; ?></p>
-				<br><br>
+				<br>
 				<p> Your current consumption is <?php echo round($totalUsed, 2); ?> liter.</p>
 				<p> You have <?php echo $limit - round($totalUsed, 2); ?> liter left from your personal limit.</p>
 			<?php endif; ?>
