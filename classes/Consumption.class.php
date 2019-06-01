@@ -141,19 +141,6 @@ class Consumption
     //     }
     // }
 
-    public static function dailyActions($id)
-    {
-        $conn = Db::getInstance();
-        $time = date('Y/m/d');
-        $stm = $conn->prepare("select action_list.icon,action_list.name from actions,action_list where actions.user_id = :id and actions.date = $time");
-        $stm->bindValue(':id', $id);
-
-        $stm->execute();
-        $actions = $stm->fetchAll(PDO::FETCH_ASSOC);
-
-        return  $actions;
-    }
-
     public static function calcTotalYear()
     {
         $conn = Db::getInstance();

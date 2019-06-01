@@ -16,7 +16,7 @@
  $used = Consumption::tips($_SESSION['user']['id']);
  $totalUsed = Consumption::calcTotalDay();
  $sensorToday = Consumption::dataToday($_SESSION['user']['productcode']);
- $actions = Consumption::dailyActions($_SESSION['user']['id']);
+ $actions = Action::dailyActions($_SESSION['user']['id']);
  $actionList = Action::getActionList();
 
   if ($limit == 0) {
@@ -105,9 +105,10 @@
   <div class='column'>
     <div class='item'>
     <h3>What did you do today</h3>
-    <ul>
+    <ul class="userList">
         <?php foreach ($actions as $a):?>
-          <img src="<?php echo $a['icon']; ?>" class="icon"><p><?php echo $a['name']; ?></p>
+            <li><?php echo 'You used '.round($a['total'], 2).' L water for the '.$a['name']; ?></li>
+          <!-- <img src="<?php //echo $a['icon'];?>" class="icon"><p><?php //echo $a['name'];?></p> -->
         <?php endforeach; ?>
       </ul>
     </div>
@@ -292,6 +293,19 @@
                 .done( function ( res ){
                     if (res.status == "success"){
                         console.log("😁");
+                        let actionItem = document.createElement('li');
+                        let total = res.data.total;
+                        console.log(total);
+                        total = parseFloat(total).toFixed(2);
+
+                        let actionId = res.data.action;
+                        let actionName = $('.form--dashboard').find(`[data-id='${actionId}']`);
+                        actionName = actionName.val();
+                        console.log(actionName);
+
+                        actionItem.innerHTML = `You used ${total} L water for the ${actionName}`;
+                        
+                        $('.userList').append(actionItem);
                     }
                 });
             }else{

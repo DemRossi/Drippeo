@@ -21,6 +21,7 @@
                 'message' => 'Action was saved',
                 'data' => [
                     'action' => $actionId,
+                    'total' => $total,
                 ],
             ];
         } catch (Throwable $t) {
