@@ -297,6 +297,9 @@
 
                         // fill with data
                         actionItem.innerHTML = `[${time}] - You used ${total} L water for the ${actionName}`;
+                        
+                        // scroll to "What did you do today"
+                        $(window).scrollTop($('.userList').offset().top);
                         // append to .userList
                         $('.userList').append(actionItem);
                     }
