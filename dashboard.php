@@ -135,16 +135,16 @@
         ]);
 
         var options = {
-          pieSliceTextStyle: {
-            color: '#706f6f',
+            pieSliceTextStyle: {
+                color: '#706f6f',
+            },
+		    pieHole: 0.35,
+		    pieSliceBorderColor: "none",
+            colors: ['#72e0eb','#f4f4f4' ],
+		    legend: {
+			  position: "none"	
           },
-		      pieHole: 0.35,
-		      pieSliceBorderColor: "none",
-          colors: ['#72e0eb','#f4f4f4' ],
-		      legend: {
-			    position: "none"	
-          },
-	};
+	    };
         var chart = new google.visualization.PieChart(document.getElementById('limit'));
         chart.draw(data, options);
       }
@@ -186,7 +186,7 @@
 		function drawStuff() {
 			var data = new google.visualization.arrayToDataTable([
 				
-				['Time of the day', 'Total per liter'],
+				['Time of the day', 'Total in liter'],
 				<?php foreach ($sensorToday as $data):
                     $timestamp = strtotime($data['date']);
                     $time = date('H:i:s', $timestamp);

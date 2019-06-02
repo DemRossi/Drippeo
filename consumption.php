@@ -12,7 +12,7 @@
       header('Location: login.php');
   }
 
-$actions = Consumption::dailyActions($_SESSION['user']['id']);
+$actions = Action::dailyActions($_SESSION['user']['id']);
 $limit = Consumption::limit($_SESSION['user']['id']);
 $used = Consumption::tips($_SESSION['user']['id']);
 $totalUsed = Consumption::calcTotalDay();
