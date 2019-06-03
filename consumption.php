@@ -21,9 +21,11 @@ $yearTotal = Consumption::calcTotalYear();
 $bigSpender = Consumption::bigSpender();
 $leastSpender = Consumption::leastSpender();
 
+// var_dump($bigSpender);
+// var_dump($leastSpender);
 $comment = '';
-if (empty($bigSpender) && empty($leastSpender)) {
-    $comment = 'Sorry no other profiles found';
+if (empty($bigSpender) || empty($leastSpender)) {
+    //$comment = 'Sorry no other profiles found';
 } elseif ($bigSpender['id'] == $_SESSION['user']['id']) {
     $comment = 'Your the biggest water user.';
 } elseif ($leastSpender['id'] == $_SESSION['user']['id']) {
@@ -55,8 +57,14 @@ $year = date('Y');
 <div class='item'>    
 <h3>Comparison</h3>
   <h4>Year</h4>
-  <p><?php echo $comment; ?></p>
-  <div id="comparison_chart"></div>
+  <?php if (empty($bigSpender) && empty($leastSpender)):?>
+      <p>Sorry no other profiles found</p>
+      <?php else:?>
+      <div id="comparison_chart"></div>
+      <?php endif; ?>
+  <!-- <p><?php //echo $comment;?></p> -->
+
+  
 
 </div>
 </div>

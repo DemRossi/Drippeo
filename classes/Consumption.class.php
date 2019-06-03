@@ -221,12 +221,12 @@ class Consumption
         }
         $max = [];
         for ($i = 0; $i < count($verbruik); ++$i) {
-            if ($verbruik[0] > $verbruik[$i]) {
-                $max = $verbruik[$i];
+            if ($verbruik[0] < $verbruik[$i]) {
+                $max = $verbruik[0];
             }
         }
 
-        return  $max;
+        return $max;
     }
 
     // 2. Minste verbruiker (zelfde aantal huishouden)
