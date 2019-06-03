@@ -19,12 +19,12 @@ $totalUsed = Consumption::calcTotalDay();
 $yearTotal = Consumption::calcTotalYear();
 
 $bigSpender = Consumption::bigSpender();
-var_dump($bigSpender);
 $leastSpender = Consumption::leastSpender();
-var_dump($leastSpender);
 
 $comment = '';
-if ($bigSpender['id'] == $_SESSION['user']['id']) {
+if (empty($bigSpender) && empty($leastSpender)) {
+    $comment = 'Sorry no other profiles found';
+} elseif ($bigSpender['id'] == $_SESSION['user']['id']) {
     $comment = 'Your the biggest water user.';
 } elseif ($leastSpender['id'] == $_SESSION['user']['id']) {
     $comment = 'You use the least water';

@@ -226,7 +226,7 @@ class Consumption
             }
         }
 
-        return $max;
+        return  $max;
     }
 
     // 2. Minste verbruiker (zelfde aantal huishouden)
@@ -249,7 +249,6 @@ class Consumption
         AND ((productcode.productCode=comsumption.productcode) 
         AND (users.productcode_id=productcode.id)) 
          AND product_settings.user_id = users.id');
-        //AND NOT users.id = :userId
         $statement->bindParam(':yourResidents', $residents);
         $statement->bindParam(':year', $year);
         // $statement->bindParam(':userId', $_SESSION['user']['id']);
