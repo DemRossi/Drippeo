@@ -203,7 +203,7 @@ class Consumption
                 $users[] += $resultArray[$i]['id'];
             }
         }
-        $verbruik = [0][1];
+        $verbruik = [];
 
         foreach ($users as $user) {
             $totalYear = 0;
@@ -217,8 +217,7 @@ class Consumption
                     $totalYear += $total;
                 }
             }
-            $verbruik[0] += $user;
-            $verbruik[1] += $totalYear;
+            $verbruik[] += $totalYear;
         }
         // $max = max($verbruik);
         return  $verbruik;
