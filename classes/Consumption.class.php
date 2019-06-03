@@ -85,7 +85,9 @@ class Consumption
     public static function dataToday($productCode)
     {
         $conn = Db::getInstance();
-        $stmnt = $conn->prepare('SELECT comsumption.productcode,`avg`,`duration`, `date`,productcode_user.email FROM `comsumption`,productcode_user WHERE (DATE(`date`) = CURDATE()) && (comsumption.productcode = :productCode) && (productcode_user.productCode = comsumption.productcode)');
+        $stmnt = $conn->prepare('SELECT comsumption.productcode,`avg`,`duration`, `date`,productcode_user.email 
+        FROM `comsumption`,productcode_user 
+        WHERE (DATE(`date`) = CURDATE()) && (comsumption.productcode = :productCode) && (productcode_user.productCode = comsumption.productcode)');
         $stmnt->bindParam(':productCode', $productCode);
         $stmnt->execute();
 
@@ -180,24 +182,46 @@ class Consumption
 
         // Selecteer grootste verbruiker met zelfde resident
 
-        $statement = $conn->prepare('SELECT comsumption.avg, comsumption.duration,users.id FROM product_settings,comsumption,users,productcode WHERE (product_settings.residents = :yourResidents) AND (YEAR(comsumption.date) = :year) AND ((productcode.productCode=comsumption.productcode) AND (users.productcode_id=productcode.id)) AND NOT users.id = :userId');
+        $statement = $conn->prepare('SELECT comsumption.avg, comsumption.duration,users.id 
+        FROM product_settings,comsumption,users,productcode 
+        WHERE (product_settings.residents = :yourResidents) 
+        AND (YEAR(comsumption.date) = :year) 
+        AND ((productcode.productCode=comsumption.productcode) 
+        AND (users.productcode_id=productcode.id)) 
+         AND product_settings.user_id = users.id');
+        //AND NOT users.id = :userId
         $statement->bindParam(':yourResidents', $residents);
         $statement->bindParam(':year', $year);
-        $statement->bindParam(':userId', $_SESSION['user']['id']);
+        // $statement->bindParam(':userId', $_SESSION['user']['id']);
         $statement->execute();
 
         $resultArray = $statement->fetchAll(PDO::FETCH_ASSOC);
-        $users = $resultArray;
-        foreach ($users as $user) {
-        }
-        /*$totalYear = 0;
-        for ($i = 0; $i < count($resultArray); ++$i) {
-            $dur = $resultArray[$i]['duration'] / 3600;
-            $total = $resultArray[$i]['avg'] * $dur;
-            $totalYear += $total;
-        }*/
 
-        return   $resultArray;
+        $users = [];
+        for ($i = 0; $i < count($resultArray); ++$i) {
+            if (!in_array($resultArray[$i]['id'], $users)) {
+                $users[] += $resultArray[$i]['id'];
+            }
+        }
+        $verbruik = [0][1];
+
+        foreach ($users as $user) {
+            $totalYear = 0;
+            for ($i = 0; $i < count($resultArray); ++$i) {
+                if ($resultArray[$i]['id'] == $user) {
+                    $dur = $resultArray[$i]['duration'] / 3600;
+                    $total = $resultArray[$i]['avg'] * $dur;
+                    $totalYear += $total;
+                } else {
+                    $total = 0;
+                    $totalYear += $total;
+                }
+            }
+            $verbruik[0] += $user;
+            $verbruik[1] += $totalYear;
+        }
+        // $max = max($verbruik);
+        return  $verbruik;
     }
 
     // 2. Minste verbruiker (zelfde aantal huishouden)

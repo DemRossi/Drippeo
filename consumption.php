@@ -45,7 +45,6 @@ $year = date('Y');
 <div class='item'>    
 <h3>Comparison</h3>
   <h4>Year</h4>
-  <h5><span class="legend-use">Average use</span></h5>
   <div id="comparison_chart"></div>
 
 </div>
@@ -84,8 +83,9 @@ $year = date('Y');
 
 <?php include_once 'includes/footer.inc.php'; ?>
 
-<script src="js/webNavigation.js"></script>
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="js/webNavigation.js"></script>
 <script src="js/charts.js"></script>
 
 
