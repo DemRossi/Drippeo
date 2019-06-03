@@ -110,7 +110,7 @@
         public static function dailyActions($id)
         {
             $conn = Db::getInstance();
-            $stm = $conn->prepare('SELECT actions.*, action_list.name  FROM `actions`, `action_list` WHERE (action_list.id = action_id) AND (actions.user_id = :userId) AND (DATE(actions.date) = CURDATE())');
+            $stm = $conn->prepare('SELECT actions.*, action_list.name,action_list.icon  FROM `actions`, `action_list` WHERE (action_list.id = action_id) AND (actions.user_id = :userId) AND (DATE(actions.date) = CURDATE())');
             $stm->bindValue(':userId', $id);
 
             $stm->execute();

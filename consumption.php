@@ -14,9 +14,12 @@
 
 $actions = Action::dailyActions($_SESSION['user']['id']);
 $limit = Consumption::limit($_SESSION['user']['id']);
-$used = Consumption::tips($_SESSION['user']['id']);
+$used = Consumption::tipsLimit($_SESSION['user']['id']);
 $totalUsed = Consumption::calcTotalDay();
 $yearTotal = Consumption::calcTotalYear();
+$bigSpender = Consumption::bigSpender();
+var_dump($bigSpender);
+
 $year = date('Y');
 
 ?><!DOCTYPE html>
@@ -41,8 +44,8 @@ $year = date('Y');
 </div>
 <div class='item'>    
 <h3>Comparison</h3>
-  <h4>Daily</h4>
-  <h5><span class="legend-limit">Limit</span>  <br> <span class="legend-use">Average use</span></h5>
+  <h4>Year</h4>
+  <h5><span class="legend-use">Average use</span></h5>
   <div id="comparison_chart"></div>
 
 </div>
@@ -50,10 +53,16 @@ $year = date('Y');
 
   <div class='column'>
   <div class="item">
-    <h3>What did you do today</h3>
-    <ul>
+  <h3>What did you do today</h3>
+    <ul class="userList">
         <?php foreach ($actions as $a):?>
-          <img src="<?php echo $a['icon']; ?>" class="icon"><p><?php echo $a['name']; ?></p>
+            <!--mogelijk nog icon invoegen-->
+            <?php
+                $timestamp = $a['date'];
+                $dateTime = explode(' ', $timestamp);
+            ?>
+            <li><img class="action_icon"src ="<?php echo $a['icon']; ?>"><?php echo '['.$dateTime[1].']'.$a['name'].': '.round($a['total'], 2).' L water '; ?></li>
+         
         <?php endforeach; ?>
       </ul>
 
@@ -126,7 +135,7 @@ $year = date('Y');
           bars: 'horizontal', 
           hAxis: {format: 'decimal'},
           height: 100,
-          width:400,
+          width:300,
           colors: ['#f4f4f4','#72e0eb'],
           legend: {
 			    position: "none"	
@@ -146,10 +155,10 @@ $year = date('Y');
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Person', 'Limit', 'Spends'],
-          ['Least spender', 100, 90],
-          ['You', <?php echo  $limit; ?>, 190],
-          ['Biggest spender', 200, 210]
+          ['Person', 'Spends'],
+          ['Least spender',  90],
+          ['You',  <?php echo  $yearTotal; ?>],
+          ['Biggest spender', 210]
         ]);
 
         var options = {
@@ -157,7 +166,7 @@ $year = date('Y');
           bars: 'horizontal', // Required for Material Bar Charts.
           hAxis: {format: 'decimal'},
           height: 200,
-          colors: ['#f4f4f4','#72e0eb'],
+          colors: ['#72e0eb'],
           legend: {
 			    position: "none"	
           },

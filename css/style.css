@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   color: #706f6f;
+  scroll-behavior: smooth;
 }
 
 .clearfix:after {
@@ -210,19 +211,15 @@ nav {
   background-color: white;
   height: 50px;
   width: 250px;
-  padding: 13px 0 9px 5px;
+  padding: 7px 0 9px 5px;
   vertical-align: baseline;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
-.dashboard--link:hover {
-  background-color: #72E0EB;
-  
-}
 
 .dashboard--link a:hover {
   font-weight: 600;
-  color:white;
+
 }
 
 .dashboard--link a {
@@ -362,7 +359,7 @@ width: 300px;
 
 .contact {
   padding: 50px 0 0 50px;
-  height: 100vh;
+
 }
 
 .contact hr {
@@ -430,13 +427,14 @@ footer {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-top: 60px;
+
 
 }
 
 .indexFooter {
   width: 100vw;
   margin-left: 0;
+
 }
 
 footer p {
@@ -586,7 +584,7 @@ footer form button {
   }
 
  .abouttekst {
-    width: 650px;
+    width: 550px;
   }
 
   .overOns {
@@ -664,7 +662,7 @@ float :left;
   .icon-div{
     display: grid;
     grid-template-columns: 200px 200px 200px 200px;
-    padding: 30px;
+    padding: 50px 30px;
     grid-column-gap: 50px;
     width: 100%;
     align-content: center;

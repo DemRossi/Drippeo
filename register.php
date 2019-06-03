@@ -132,9 +132,19 @@ if (!empty($_POST)) {
 }?>">
 						<span class="input--focus"></span>
                     </div>
-				
+                    <div class="form--check">
+                    <div>
+							<a href="index.php" class="txt1">
+								Home 
+							</a>
+						</div>
+						<div>
+							<a href="Login.php" class="txt1">
+								Login
+							</a>
+                        </div>
+                        </div>
 					<div class="form--btn">
-					
 							<input type="submit" name="submit" value="Sign me up!" >	
 						
 					</div>

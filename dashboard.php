@@ -13,11 +13,12 @@
      // header('Location: login.php');
   }
  $limit = Consumption::limit($_SESSION['user']['id']);
- $used = Consumption::tips($_SESSION['user']['id']);
+ $used = Consumption::tipsLimit($_SESSION['user']['id']);
  $totalUsed = Consumption::calcTotalDay();
  $sensorToday = Consumption::dataToday($_SESSION['user']['productcode']);
  $actions = Action::dailyActions($_SESSION['user']['id']);
  $actionList = Action::getActionList();
+ $tipsBadkamer = Consumption::tipsAlgemeen($_SESSION['user']['id']);
 
   if ($limit == 0) {
       $noLimit = 'You need to set your limit in settings first before you can use this functionality';
@@ -80,7 +81,7 @@
     </div>
     <div class="row">
       <a href='saving.php'> <h3>Personal tips & tricks</h3></a>
-      
+      <p><?php echo  $tipsBadkamer; ?></p>
     </div>
    
   </div>
@@ -96,6 +97,7 @@
   <div class='column'>
     <div class='item'>
     <h3>What did you do today</h3>
+    <?php if (!empty($actions)):?>
     <ul class="userList">
         <?php foreach ($actions as $a):?>
             <!--mogelijk nog icon invoegen-->
@@ -103,10 +105,13 @@
                 $timestamp = $a['date'];
                 $dateTime = explode(' ', $timestamp);
             ?>
-            <li><?php echo '['.$dateTime[1].'] - You used '.round($a['total'], 2).' L water for the '.$a['name']; ?></li>
+            <li><img class="action_icon"src ="<?php echo $a['icon']; ?>"><?php echo '['.$dateTime[1].']'.$a['name'].': '.round($a['total'], 2).' L water '; ?></li>
          
         <?php endforeach; ?>
       </ul>
+      <?php else:?>
+      <h4>No actions today!</h4>
+      <?php endif; ?>
     </div>
 
     <div class='item'></div>

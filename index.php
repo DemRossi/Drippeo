@@ -66,7 +66,8 @@
             <span class="titelabout">But hey, we're on a mission!</span>
             <br><br>
                  We all know economical and ecological thinking is becoming a real state of mind, but some people might need a helping hand.
-                     And that's when Drippeo is there! It's an investment to save not only water but also money. Our software will understand after X number of times when you shower. If you shower every day at 7 pm and enter it, our software will understand that. 
+                     And that's when Drippeo is there! It's an investment to save not only water but also money. Our software will understand after X number of times when you shower. 
+                     If you shower every day at 7 pm and enter it, our software will understand that. 
                      And that's how you can save easily. On water, and money.
                 </p>
                 <div class="icon-div">
@@ -130,24 +131,10 @@
         </form>
     </footer>
     </div>
-    <script src="js/mobileNavigation.js">
-        /****** smooth scroll ******/
-		$(document).ready(function() {
-			$("a").on('click', function(event) {
 
-				if (this.hash !== "") {
-					event.preventDefault();
 
-					var hash = this.hash;
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
-					$('html, body').animate({
-						scrollTop: $(hash).offset().top
-					}, 1500, function() {
-						window.location.hash = hash;
-					});
-				}
-			});
-		});
-    </script>
+   <script src="js/mobileNavigation.js"></script>
 </body>
 </html>

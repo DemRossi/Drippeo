@@ -48,8 +48,8 @@ if (!empty($_POST)) {
 						</div>
 
 						<div>
-							<a href="#" class="txt1">
-								Forgot?
+							<a href="inde.php" class="txt1">
+								Home 
 							</a>
 						</div>
 						<div>

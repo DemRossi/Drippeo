@@ -26,7 +26,7 @@ class Consumption
         return $array;
     }
 
-    public static function tips($id)
+    public static function tipsLimit($id)
     {
         $limit = self::limit($id);
         $used = self::calcTotalDay();
@@ -50,7 +50,7 @@ class Consumption
         return $result;
     }
 
-    public static function badkamer($id)
+    public static function tipsAlgemeen($id)
     {
         $conn = Db::getInstance();
         //bad gebruik
@@ -68,12 +68,13 @@ class Consumption
         $statement->bindValue(':id', $id);
         $statement->execute();
         $showerTime = $statement->fetch(PDO::FETCH_COLUMN);
+        $showerMin = $showerTime / 3600;
 
         /* if ($baths > 3) {
              $result = 'You take a lot of baths. If you take a shower more it will cost you less';
-         } else */if ($showerTime < 5) {
+         } else */if ($showerMin < 5) {
             $result = "It's great you're showers are less then 5 min. That way you save a lot of water";
-        } elseif ($showerTime > 10) {
+        } elseif ($showerMin > 10) {
             $result = 'Shower times taking more than 10 min. Try to shorten them';
         } else {
             return $result;
@@ -170,15 +171,32 @@ class Consumption
     public static function bigSpender()
     {
         $conn = Db::getInstance();
+        $year = date('Y');
         //Hoeveel mensen wonen er bij u zelf
         $stm = $conn->prepare('SELECT residents FROM product_settings WHERE user_id = :id ');
         $stm->bindParam(':id', $_SESSION['user']['id']);
         $stm->execute();
         $residents = $stm->fetch(PDO::FETCH_COLUMN);
-        // Selecteer grootste verbruiker met zelfde residents
-        $statement = $conn->prepare('SELECT comsumption.avg, comsumption.duration FROM product_settings,consumption WHERE product_settings.residents = :yourResidents');
+
+        // Selecteer grootste verbruiker met zelfde resident
+
+        $statement = $conn->prepare('SELECT comsumption.avg, comsumption.duration,users.id FROM product_settings,comsumption,users,productcode WHERE product_settings.residents = :yourResidents AND YEAR(comsumption.date) = :year AND productcode.productCode=comsumption.productcode AND users.productcode_id=productcode.id');
         $statement->bindParam(':yourResidents', $residents);
+        $statement->bindParam(':year', $year);
         $statement->execute();
+
+        $resultArray = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $users = $resultArray['id'];
+        foreach ($users as $user) {
+        }
+        /*$totalYear = 0;
+        for ($i = 0; $i < count($resultArray); ++$i) {
+            $dur = $resultArray[$i]['duration'] / 3600;
+            $total = $resultArray[$i]['avg'] * $dur;
+            $totalYear += $total;
+        }*/
+
+        return   $resultArray;
     }
 
     // 2. Minste verbruiker (zelfde aantal huishouden)
@@ -190,11 +208,5 @@ class Consumption
         $stm->bindParam(':id', $_SESSION['user']['id']);
         $stm->execute();
         $residents = $stm->fetch(PDO::FETCH_COLUMN);
-    }
-
-    // 3. gemiddelde van dagelijks verbruik van jezelf
-    public static function selfSpender($id)
-    {
-        $conn = Db::getInstance();
     }
 }
