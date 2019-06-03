@@ -61,7 +61,7 @@ $year = date('Y');
                 $timestamp = $a['date'];
                 $dateTime = explode(' ', $timestamp);
             ?>
-            <li><img class="action_icon"src ="<?php echo $a['icon']; ?>"><?php echo '['.$dateTime[1].']'.$a['name'].': '.round($a['total'], 2).' L water '; ?></li>
+            <li><img class="action_icon"src ="<?php echo $a['icon']; ?>"><?php echo '['.$dateTime[1].'] - '.$a['name'].': '.round($a['total'], 2).' L water '; ?></li>
          
         <?php endforeach; ?>
       </ul>
