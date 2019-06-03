@@ -61,7 +61,9 @@ $year = date('Y');
   <div class="item">
   
   <h3>Your yearly consumption</h3>
-    <h4>This year: <?php echo  date('Y'); ?></h4>
+    <h4>This year: <?php echo  date('Y'); ?> </h4>
+    <p>You used: <?php echo round($yearTotal, 2); ?> liter.</p>
+    
 <div id="barchart_material"> 
 </div>
      </div>
@@ -107,7 +109,9 @@ $year = date('Y');
       }
 
 </script>
+
     <script type="text/javascript">
+    // JAAR VERBRUIK
       google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawChart);
 
@@ -136,7 +140,8 @@ $year = date('Y');
       }
     </script>
     <script>
-        google.charts.load('current', {'packages':['bar']});
+      // VERGELIJKING
+      google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
