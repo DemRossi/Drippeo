@@ -17,8 +17,16 @@ $limit = Consumption::limit($_SESSION['user']['id']);
 $used = Consumption::tipsLimit($_SESSION['user']['id']);
 $totalUsed = Consumption::calcTotalDay();
 $yearTotal = Consumption::calcTotalYear();
+
 $bigSpender = Consumption::bigSpender();
-var_dump($bigSpender);
+$leastSpender = Consumption::leastSpender();
+
+$comment = '';
+if ($bigSpender['id'] == $_SESSION['user']['id']) {
+    $comment = 'Your the biggest water user.';
+} elseif ($leastSpender['id'] == $_SESSION['user']['id']) {
+    $comment = 'You use the least water';
+}
 
 $year = date('Y');
 
@@ -45,6 +53,7 @@ $year = date('Y');
 <div class='item'>    
 <h3>Comparison</h3>
   <h4>Year</h4>
+  <p><?php echo $comment; ?></p>
   <div id="comparison_chart"></div>
 
 </div>
@@ -84,9 +93,11 @@ $year = date('Y');
 <?php include_once 'includes/footer.inc.php'; ?>
 
 
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script src="js/webNavigation.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="js/charts.js"></script>
+<script src="js/webNavigation.js"></script>
 
 
   <script>
@@ -156,9 +167,9 @@ $year = date('Y');
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Person', 'Spends'],
-          ['Least spender',  90],
+          ['Least spender', <?php echo $leastSpender['verbruik']; ?> ],
           ['You',  <?php echo  $yearTotal; ?>],
-          ['Biggest spender', 210]
+          ['Biggest spender', <?php echo $bigSpender['verbruik']; ?>]
         ]);
 
         var options = {

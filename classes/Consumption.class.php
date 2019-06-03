@@ -217,20 +217,75 @@ class Consumption
                     $totalYear += $total;
                 }
             }
-            $verbruik[] += $totalYear;
+            $verbruik[] = ['id' => $user, 'verbruik' => $totalYear];
         }
-        // $max = max($verbruik);
-        return  $verbruik;
+
+        for ($i = 0; $i < count($verbruik); ++$i) {
+            if ($verbruik[0] > $verbruik[$i]) {
+                $max = $verbruik[$i];
+            }
+        }
+
+        return  $max;
     }
 
     // 2. Minste verbruiker (zelfde aantal huishouden)
     public static function leastSpender()
     {
         $conn = Db::getInstance();
+        $year = date('Y');
         //Hoeveel mensen wonen er bij u zelf
-        $stm = $conn->prepare('Select residents from product_settings where user_id = :id ');
+        $stm = $conn->prepare('SELECT residents FROM product_settings WHERE user_id = :id ');
         $stm->bindParam(':id', $_SESSION['user']['id']);
         $stm->execute();
         $residents = $stm->fetch(PDO::FETCH_COLUMN);
+
+        // Selecteer grootste verbruiker met zelfde resident
+
+        $statement = $conn->prepare('SELECT comsumption.avg, comsumption.duration,users.id 
+        FROM product_settings,comsumption,users,productcode 
+        WHERE (product_settings.residents = :yourResidents) 
+        AND (YEAR(comsumption.date) = :year) 
+        AND ((productcode.productCode=comsumption.productcode) 
+        AND (users.productcode_id=productcode.id)) 
+         AND product_settings.user_id = users.id');
+        //AND NOT users.id = :userId
+        $statement->bindParam(':yourResidents', $residents);
+        $statement->bindParam(':year', $year);
+        // $statement->bindParam(':userId', $_SESSION['user']['id']);
+        $statement->execute();
+
+        $resultArray = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $users = [];
+        for ($i = 0; $i < count($resultArray); ++$i) {
+            if (!in_array($resultArray[$i]['id'], $users)) {
+                $users[] += $resultArray[$i]['id'];
+            }
+        }
+        $verbruik = [];
+
+        foreach ($users as $user) {
+            $totalYear = 0;
+            for ($i = 0; $i < count($resultArray); ++$i) {
+                if ($resultArray[$i]['id'] == $user) {
+                    $dur = $resultArray[$i]['duration'] / 3600;
+                    $total = $resultArray[$i]['avg'] * $dur;
+                    $totalYear += $total;
+                } else {
+                    $total = 0;
+                    $totalYear += $total;
+                }
+            }
+            $verbruik[] = ['id' => $user, 'verbruik' => $totalYear];
+        }
+
+        for ($i = 0; $i < count($verbruik); ++$i) {
+            if ($verbruik[1] < $verbruik[$i]) {
+                $min = $verbruik[$i];
+            }
+        }
+
+        return  $min;
     }
 }
