@@ -186,7 +186,7 @@ class Consumption
         $statement->execute();
 
         $resultArray = $statement->fetchAll(PDO::FETCH_ASSOC);
-        $users = $resultArray['id'];
+        $users = $resultArray;
         foreach ($users as $user) {
         }
         /*$totalYear = 0;
