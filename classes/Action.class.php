@@ -96,6 +96,17 @@
             return $result;
         }
 
+        public static function getActionIconById($actionId)
+        {
+            $conn = Db::getInstance();
+            $stmnt = $conn->prepare('select icon from action_list where id = :actionId');
+            $stmnt->bindParam(':actionId', $actionId);
+            $stmnt->execute();
+            $result = $stmnt->fetch(PDO::FETCH_OBJ);
+
+            return $result->icon;
+        }
+
         public function saveAction()
         {
             $conn = Db::getInstance();

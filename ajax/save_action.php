@@ -12,12 +12,13 @@
             $a->setTotal($total);
             $a->setTimestamp($timestamp);
             $a->saveAction();
-
+            $icon = Action::getActionIconById($actionId);
             $result = [
                 'status' => 'success',
                 'message' => 'Action was saved',
                 'data' => [
                     'action' => $actionId,
+                    'icon' => $icon,
                     'total' => $total,
                     'time' => $timestamp,
                 ],

@@ -105,7 +105,7 @@
                 $timestamp = $a['date'];
                 $dateTime = explode(' ', $timestamp);
             ?>
-            <li><img class="action_icon"src ="<?php echo $a['icon']; ?>"><?php echo '['.$dateTime[1].'] - '.$a['name'].': '.round($a['total'], 2).' L water '; ?></li>
+            <li><img class="action_icon" src ="<?php echo $a['icon']; ?>"><?php echo '['.$dateTime[1].'] - '.$a['name'].': '.round($a['total'], 2).' L water '; ?></li>
          
         <?php endforeach; ?>
       </ul>
@@ -290,9 +290,11 @@
                     
                 })
                 .done( function ( res ){
+                    
                     if (res.status == "success"){
                         // create new listitem
                         let actionItem = document.createElement('li');
+                        let iconPath = res.data.icon;
 
                         let total = res.data.total;
                         total = parseFloat(total).toFixed(2);
@@ -302,10 +304,11 @@
                         actionName = actionName.val();
 
                         // fill with data
-                        actionItem.innerHTML = `[${time}] - You used ${total} L water for the ${actionName}`;
+                        actionItem.innerHTML = `<img class="action_icon" src ="${iconPath}">[${time}] - ${actionName}: ${total} L`;
                         
                         // scroll to "What did you do today"
                         $(window).scrollTop($('.userList').offset().top);
+                        
                         // append to .userList
                         $('.userList').append(actionItem);
                     }
