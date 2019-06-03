@@ -19,7 +19,9 @@ $totalUsed = Consumption::calcTotalDay();
 $yearTotal = Consumption::calcTotalYear();
 
 $bigSpender = Consumption::bigSpender();
+var_dump($bigSpender);
 $leastSpender = Consumption::leastSpender();
+var_dump($leastSpender);
 
 $comment = '';
 if ($bigSpender['id'] == $_SESSION['user']['id']) {

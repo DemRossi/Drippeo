@@ -219,14 +219,14 @@ class Consumption
             }
             $verbruik[] = ['id' => $user, 'verbruik' => $totalYear];
         }
-
+        $max = [];
         for ($i = 0; $i < count($verbruik); ++$i) {
             if ($verbruik[0] > $verbruik[$i]) {
                 $max = $verbruik[$i];
             }
         }
 
-        return  $max;
+        return $max;
     }
 
     // 2. Minste verbruiker (zelfde aantal huishouden)
@@ -279,13 +279,13 @@ class Consumption
             }
             $verbruik[] = ['id' => $user, 'verbruik' => $totalYear];
         }
-
+        $min = [];
         for ($i = 0; $i < count($verbruik); ++$i) {
-            if ($verbruik[1] < $verbruik[$i]) {
+            if ($verbruik[0] < $verbruik[$i]) {
                 $min = $verbruik[$i];
             }
         }
 
-        return  $min;
+        return $min;
     }
 }
