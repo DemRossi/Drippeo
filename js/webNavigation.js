@@ -33,8 +33,8 @@ window.addEventListener('resize', (e)=>{
   }
   
 
-    /****** smooth scroll ******/
-		$(document).ready(function() {
+/****** smooth scroll ******/
+	 /*   	$(document).ready(function() {
 			$("a").on('click', function(event) {
 
 				if (this.hash !== "") {
@@ -49,7 +49,7 @@ window.addEventListener('resize', (e)=>{
 					});
 				}
 			});
-		});
+		});*/
   
   
  
