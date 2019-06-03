@@ -180,9 +180,10 @@ class Consumption
 
         // Selecteer grootste verbruiker met zelfde resident
 
-        $statement = $conn->prepare('SELECT comsumption.avg, comsumption.duration,users.id FROM product_settings,comsumption,users,productcode WHERE product_settings.residents = :yourResidents AND YEAR(comsumption.date) = :year AND productcode.productCode=comsumption.productcode AND users.productcode_id=productcode.id');
+        $statement = $conn->prepare('SELECT comsumption.avg, comsumption.duration,users.id FROM product_settings,comsumption,users,productcode WHERE (product_settings.residents = :yourResidents) AND (YEAR(comsumption.date) = :year) AND ((productcode.productCode=comsumption.productcode) AND (users.productcode_id=productcode.id)) AND NOT users.id = :userId');
         $statement->bindParam(':yourResidents', $residents);
         $statement->bindParam(':year', $year);
+        $statement->bindParam(':userId', $_SESSION['user']['id']);
         $statement->execute();
 
         $resultArray = $statement->fetchAll(PDO::FETCH_ASSOC);
