@@ -1,0 +1,34 @@
+<?php
+
+    //Connectie klasses
+  include_once 'bootstrap.php';
+
+  // Controleren of we al ingelogd zijn
+  if (isset($_SESSION['User'])) {
+      //logged in user
+      //echo "😎";
+  } else {
+      //no logged in user
+      header('Location: login.php');
+  }
+
+?><!DOCTYPE html>
+<html lang="en">
+<head>
+    <?php include_once 'includes/head.inc.php'; ?>
+    <title>Consumption</title>
+</head>
+<body>
+<?php include_once 'includes/nav.inc.php'; ?>
+
+
+
+
+
+
+
+
+<?php include_once 'includes/footer.inc.php'; ?>
+<script src="js/webNavigation.js"></script>
+</body>
+</html>
